@@ -1,0 +1,28 @@
+{
+  "name": "new_web_app",
+  "version": "2",
+  "description": "IoT Toolkit's implementation for Bolid Sp. z o.o.",
+  "author": "IoT-Toolkit",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next build && next export"
+  },
+  "dependencies": {
+    "image-trace-loader": "^1.0.2",
+    "lqip-loader": "^2.2.0",
+    "next": "^9.5.2",
+    "next-optimized-images": "^2.6.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1",
+    "unstated-next": "^1.1.0",
+    "webp-loader": "^0.6.0"
+  },
+  "devDependencies": {
+    "next-compose-plugins": "^2.2.0",
+    "next-offline": "^5.0.2",
+    "next-progressbar": "^1.0.0"
+  }
+}
