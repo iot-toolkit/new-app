@@ -44,7 +44,7 @@ const Input = styled(_Input)`
 
   .underline {
     position: absolute;
-    bottom: -2px;
+    bottom: -3px;
     left: 0.8em;
     width: calc(100% - 1.6em);
     height: 1px;

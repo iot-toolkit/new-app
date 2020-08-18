@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { colors } from "../../../resources";
 
+const { whitegrey } = colors;
+
 const Button = styled.button`
   font-size: 0.75rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: ${colors.primary};
+  color: ${({ variant }) => colors[variant]};
 
-  border: 0.1em solid
-    ${({ secondary }) => (secondary ? colors.secondary : colors.primary)};
+  border: 0.1em solid ${({ variant }) => colors[variant]};
   border-radius: 24px;
 
   padding: 1.4em 3.3em;
@@ -20,14 +21,13 @@ const Button = styled.button`
   background-image: linear-gradient(
     45deg,
     transparent 50%,
-    ${({ secondary }) => (secondary ? colors.secondary : colors.primary)} 50%
+    ${({ variant }) => colors[variant]} 50%
   );
   background-position: 25%;
   background-size: 400%;
 
   &:hover:not(:active) {
-    color: ${({ secondary }) =>
-      secondary ? colors.primary : colors.secondary};
+    color: ${whitegrey};
     background-position: 100%;
   }
 
@@ -42,7 +42,7 @@ const Button = styled.button`
 `;
 
 Button.defaultProps = {
-  secondary: false,
+  variant: "primary",
 };
 
 export default Button;
