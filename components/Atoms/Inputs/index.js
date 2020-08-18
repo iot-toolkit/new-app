@@ -1,4 +1,5 @@
-import { Password } from "./TextInputs";
-import DatePicker from "./DatePicker";
+import Password from "./Password";
+import Input from "./Input";
+import TextInput from "./TextInput";
 
-export { Password, DatePicker };
+export { Password, Input, TextInput };
