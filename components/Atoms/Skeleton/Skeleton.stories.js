@@ -10,16 +10,7 @@ export default {
 const Template = (args) => <Skeleton {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {
-  count: 1,
-  duration: 1.2,
-  width: null,
-  wrapper: null,
-  height: null,
-  circle: false,
-  baseColor: "#eee",
-  highlightColor: "#f5f5f5",
-};
+Primary.args = {};
 
 export const Editable = Template.bind({});
 Editable.args = {

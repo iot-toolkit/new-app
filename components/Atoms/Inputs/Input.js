@@ -131,7 +131,6 @@ const Input = styled(_Input)`
 
   .underline {
     position: absolute;
-
     height: 1px;
     width: ${({ icon, placeholder }) =>
       icon
