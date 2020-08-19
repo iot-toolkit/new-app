@@ -6,26 +6,27 @@ function _Input({
   className,
   icon: Icon,
   placeholder: Placeholder,
+  type,
   width,
   height,
 }) {
   return Icon ? (
     <span className={className}>
-      <input value={value} />
+      <input value={value} type={type} />
       <span className="underline" />
       <div className="blur" />
       <Icon color="white" />
     </span>
   ) : Placeholder ? (
     <span className={className}>
-      <input value={value} />
+      <input value={value} type={type} />
       <span className="underline" />
       <div className="blur" />
       <span className="placeholder">{Placeholder}</span>
     </span>
   ) : (
     <span className={className}>
-      <input value={value} />
+      <input value={value} type={type} />
       <span className="underline" />
     </span>
   );
@@ -157,7 +158,8 @@ const Input = styled(_Input)`
 `;
 
 Input.defaultProps = {
-  value: "Kurwa, w kurwę długi tekst. Dalej napisany jest jeszcze większy.",
+  value: "",
+  type: "text",
   icon: null,
   placeholder: null,
   width: "200px",
