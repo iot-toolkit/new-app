@@ -1,6 +1,5 @@
 import React from "react";
 import Input from "./Input";
-import { text } from "@storybook/addon-knobs";
 import { GiMassDriver } from "react-icons/gi";
 
 export default {
@@ -16,4 +15,9 @@ Primary.args = { width: "500px" };
 export const Icon = Template.bind({});
 Icon.args = {
   icon: GiMassDriver,
+};
+
+export const Placeholder = Template.bind({});
+Placeholder.args = {
+  placeholder: "First Name",
 };

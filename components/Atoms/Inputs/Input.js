@@ -1,13 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 
-function _Input({ value, className, icon: Icon, width, height }) {
+function _Input({
+  value,
+  className,
+  icon: Icon,
+  placeholder: Placeholder,
+  width,
+  height,
+}) {
   return Icon ? (
     <span className={className}>
       <input value={value} />
       <span className="underline" />
       <div className="blur" />
       <Icon color="white" />
+    </span>
+  ) : Placeholder ? (
+    <span className={className}>
+      <input value={value} />
+      <span className="underline" />
+      <div className="blur" />
+      <span className="placeholder">{Placeholder}</span>
     </span>
   ) : (
     <span className={className}>
@@ -53,47 +67,77 @@ const Input = styled(_Input)`
   }
 
   > svg {
-    height: ${({ height }) => height};
+    height: inherit;
     position: absolute;
     right: 8px;
     z-index: 2;
     visibility: visible;
     opacity: 1;
     transition: visibility 600s, opacity 600ms ease-in-out;
+    pointer-events: none;
+    transition-delay: 300ms;
+  }
+
+  .placeholder {
+    height: inherit;
+    position: absolute;
+    top: 0;
+    right: 8px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    color: white;
+    pointer-events: none;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 600ms linear, opacity 600ms ease-in-out;
+    transition-delay: 300ms;
   }
 
   .blur {
-    height: inherit;
+    height: calc(100% - 16px);
     width: ${({ width }) => width};
     position: absolute;
     background: linear-gradient(
       90deg,
       rgba(51, 51, 51, 0) 0%,
-      rgba(51, 51, 51, 0) 60%,
-      rgba(51, 51, 51, 1) 85%,
+      rgba(51, 51, 51, 0) ${({ icon }) => (icon ? "60%" : "30%")},
+      rgba(51, 51, 51, 1) ${({ icon }) => (icon ? "85%" : "55%")},
       rgba(51, 51, 51, 1) 100%
     );
     right: 0;
-    top: 0;
+    top: 8px;
     border-radius: 8px;
     pointer-events: none;
     visibility: visible;
     opacity: 1;
-    transition: visibility 600ms, opacity 300ms ease-in-out;
+    transition: visibility 600ms linear, width 400ms ease-in-out;
+    transition-delay: 100ms;
   }
 
-  input:focus ~ .blur,
-  input:focus ~ svg {
+  input:focus ~ .blur {
+    visibility: hidden;
+    width: 0;
+    transition: visibility 300ms linear, width 900ms ease-in-out;
+  }
+
+  input:focus ~ svg,
+  input:focus ~ .placeholder {
     visibility: hidden;
     opacity: 0;
-    transition: visibility 900ms, opacity 600ms ease-in-out;
+    transition: visibility 900ms linear, opacity 250ms ease-in-out;
   }
 
   .underline {
     position: absolute;
 
     height: 1px;
-    width: calc(90% - 1.6em);
+    width: ${({ icon, placeholder }) =>
+      icon
+        ? "calc(90% - 1.6em)"
+        : placeholder
+        ? "calc(65% - 1.6em)"
+        : "calc(100% - 1.6em)"};
     bottom: 8px;
     left: 0.8em;
     z-index: 1;
@@ -113,8 +157,9 @@ const Input = styled(_Input)`
 `;
 
 Input.defaultProps = {
-  value: "Kurwa, w kurwe długi tekst. drtfgyhuijkoplkojihugyftdrsftgyhuji",
+  value: "Kurwa, w kurwę długi tekst. Dalej napisany jest jeszcze większy.",
   icon: null,
+  placeholder: null,
   width: "200px",
   height: "40px",
 };
