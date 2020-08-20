@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
+
+
 function _Avatar({ className }) {
+
+  const [initials, setInitials] = useState('')
+  const name = "Kacper Wargacki"
+
+
+  function getInitials() {
+    var parts = name.split(' ')
+    var initials = ''
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].length > 0 && parts[i] !== '') {
+        initials += parts[i][0]
+      }
+    }
+    setInitials(initials)
+  }
+  useEffect(() => {
+    getInitials()
+  }, [])
   return <div className={className}>
-    <div>KW</div>
+    <div>{initials}</div>
   </div>
 }
 
-const darkgrey = "#333";
-const whitegrey = "#ececec";
 
 const Avatar = styled(_Avatar)`
  >div { 
