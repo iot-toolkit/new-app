@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./Button";
+import IconButton from "./IconButton";
 
 export default {
   title: "Design/Atoms/Button",
@@ -13,5 +14,7 @@ Primary.args = {};
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  secondary: true,
+  variant: "secondary",
 };
+
+export const Icon = () => <IconButton />;

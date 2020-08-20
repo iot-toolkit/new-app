@@ -1,3 +1,3 @@
-import Toggle from "./Toggle";
+import Button from "./Button";
 
-export { Toggle };
+export default Button;

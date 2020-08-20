@@ -1,10 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 
-function _Input({ value, className }) {
-  return (
+function _Input({
+  value,
+  className,
+  icon: Icon,
+  placeholder: Placeholder,
+  type,
+  width,
+  height,
+}) {
+  return Icon ? (
     <span className={className}>
-      <input value={value} />
+      <input value={value} type={type} />
+      <span className="underline" />
+      <div className="blur" />
+      <Icon color="white" />
+    </span>
+  ) : Placeholder ? (
+    <span className={className}>
+      <input value={value} type={type} />
+      <span className="underline" />
+      <div className="blur" />
+      <span className="placeholder">{Placeholder}</span>
+    </span>
+  ) : (
+    <span className={className}>
+      <input value={value} type={type} />
       <span className="underline" />
     </span>
   );
@@ -15,9 +37,10 @@ const whitegrey = "#ececec";
 
 const Input = styled(_Input)`
   position: relative;
-  > input {
-    width: 200px;
+  display: inline-block;
+  height: ${({ height }) => height};
 
+  > input {
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     color: ${whitegrey};
@@ -26,6 +49,8 @@ const Input = styled(_Input)`
     border-radius: 8px;
 
     padding: 0.8em 1em;
+    width: ${({ width }) => width};
+    height: calc(100% - 1.8em);
     cursor: text;
 
     transition: background 600ms ease-in-out, color 600ms ease-in-out;
@@ -42,22 +67,102 @@ const Input = styled(_Input)`
     }
   }
 
+  > svg {
+    height: inherit;
+    position: absolute;
+    right: 8px;
+    z-index: 2;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 600s, opacity 600ms ease-in-out;
+    pointer-events: none;
+    transition-delay: 300ms;
+  }
+
+  .placeholder {
+    height: inherit;
+    position: absolute;
+    top: 0;
+    right: 8px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    color: white;
+    pointer-events: none;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 600ms linear, opacity 600ms ease-in-out;
+    transition-delay: 300ms;
+  }
+
+  .blur {
+    height: calc(100% - 16px);
+    width: ${({ width }) => width};
+    position: absolute;
+    background: linear-gradient(
+      90deg,
+      rgba(51, 51, 51, 0) 0%,
+      rgba(51, 51, 51, 0) ${({ icon }) => (icon ? "60%" : "30%")},
+      rgba(51, 51, 51, 1) ${({ icon }) => (icon ? "85%" : "55%")},
+      rgba(51, 51, 51, 1) 100%
+    );
+    right: 0;
+    top: 8px;
+    border-radius: 8px;
+    pointer-events: none;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 600ms linear, width 400ms ease-in-out;
+    transition-delay: 100ms;
+  }
+
+  input:focus ~ .blur {
+    visibility: hidden;
+    width: 0;
+    transition: visibility 300ms linear, width 900ms ease-in-out;
+  }
+
+  input:focus ~ svg,
+  input:focus ~ .placeholder {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 900ms linear, opacity 250ms ease-in-out;
+  }
+
   .underline {
     position: absolute;
-    bottom: -2px;
-    left: 0.8em;
-    width: calc(100% - 1.6em);
     height: 1px;
-    transition: background 600ms ease-in-out;
+    width: ${({ icon, placeholder }) =>
+      icon
+        ? "calc(90% - 1.6em)"
+        : placeholder
+        ? "calc(65% - 1.6em)"
+        : "calc(100% - 1.6em)"};
+    bottom: 8px;
+    left: 0.8em;
+    z-index: 1;
+
+    transition: background 600ms ease-in-out, width 600ms ease-in-out;
+
     background: ${darkgrey};
     background-image: linear-gradient(45deg, transparent 50%, ${whitegrey} 50%);
-    background-size: 400%;
     background-position: 100%;
+    background-size: 400%;
   }
 
   input:focus + .underline {
     background-position: 25%;
+    width: calc(100% - 1.6em);
   }
 `;
+
+Input.defaultProps = {
+  value: "",
+  type: "text",
+  icon: null,
+  placeholder: null,
+  width: "200px",
+  height: "40px",
+};
 
 export default Input;
