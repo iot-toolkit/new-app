@@ -1,11 +1,7 @@
 import React from "react";
 import { FaBell } from "react-icons/fa";
 import styled from "styled-components";
-import { colors } from "../../../resources";
-
-const { whitegrey, primary, secondary } = colors;
-
-const reverse = { primary: secondary, secondary: primary };
+import { colors, reverse } from "../../../resources";
 
 function _IconButton({ className }) {
   return <FaBell className={className}></FaBell>;

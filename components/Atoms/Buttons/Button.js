@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../resources";
+import { colors, keyframes } from "../../../resources";
 
 const { whitegrey } = colors;
 
@@ -8,6 +8,8 @@ const Button = styled.button`
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: ${({ variant }) => colors[variant]};
+
+  animation: 0.6s linear 0s 1 ${keyframes.default};
 
   border: 0.1em solid ${({ variant }) => colors[variant]};
   border-radius: 24px;
