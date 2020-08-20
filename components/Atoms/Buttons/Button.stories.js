@@ -22,4 +22,9 @@ Confirm.args = {
   variant: "confirm",
 };
 
+export const Cancel = Template.bind({});
+Cancel.args = {
+  variant: "cancel",
+};
+
 export const Icon = () => <IconButton />;
