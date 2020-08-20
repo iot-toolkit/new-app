@@ -9,10 +9,10 @@ export default {
 const Template = (args) => <AuthBadge {...args} />;
 
 export const User = Template.bind({});
-User.args = {};
+User.args = { level: "0" };
 
 export const Admin = Template.bind({});
-Admin.args = {};
+Admin.args = { level: "1" };
 
 export const MasterAdmin = Template.bind({});
-MasterAdmin.args = {};
+MasterAdmin.args = { level: "2" };

@@ -41,6 +41,7 @@ const Input = styled(_Input)`
   height: ${({ height }) => height};
 
   > input {
+    font-family: "Asap";
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     color: ${whitegrey};
@@ -88,6 +89,8 @@ const Input = styled(_Input)`
     display: flex;
     align-items: center;
     color: white;
+    font-family: "Baloo 2";
+    text-transform: lowercase;
     pointer-events: none;
     visibility: visible;
     opacity: 1;

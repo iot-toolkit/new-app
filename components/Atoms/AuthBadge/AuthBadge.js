@@ -2,60 +2,36 @@ import React from "react";
 import styled from "styled-components";
 import { GrDiamond } from "react-icons/gr";
 
-function _AuthBadge({ className }) {
+function _AuthBadge({ className, level }) {
   return (
     <span className={className}>
       <GrDiamond />
-      <div>User</div>
+      <div>
+        {level === "2" ? "master admin" : level === "1" ? "admin" : "user"}
+      </div>
     </span>
   );
 }
 
 const AuthBadge = styled(_AuthBadge)`
   display: inline-flex;
+  align-items: center;
 
   svg:hover + div {
-    animation-name: textRight;
-    animation-duration: 500ms;
-    transform: translateX(0px);
+    transform: translateX(3px);
     opacity: 1;
   }
 
-  svg:not(:hover) + div {
-    animation-name: textLeft;
-    animation-duration: 500ms;
-    transform: translateX(-10px);
-    opacity: 0;
-  }
-
   > div {
+    transform: translateX(-15px);
+    opacity: 0;
     top: 0;
     z-index: -20;
-  }
-
-  @keyframes textRight {
-    0% {
-      transform: translateX(-10px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0px);
-      opacity: 1;
-    }
-  }
-
-  @keyframes textLeft {
-    0% {
-      transform: translateX(0px);
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(-10px);
-      opacity: 0;
-    }
+    transition: transform 400ms ease-out, opacity 400ms linear;
+    font-family: "Baloo 2";
   }
 `;
 
-AuthBadge.defaultProps = {};
+AuthBadge.defaultProps = { level: "0" };
 
 export default AuthBadge;
