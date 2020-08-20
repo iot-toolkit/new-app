@@ -1,55 +1,76 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-
-
 function _Avatar({ className, name }) {
-
-  const [initials, setInitials] = useState('')
-
+  const [initials, setInitials] = useState(getInitials());
 
   function getInitials() {
-    var parts = name.split(' ')
-    var initials = ''
-    for (var i = 0; i < parts.length; i++) {
-      if (parts[i].length > 0 && parts[i] !== '') {
-        initials += parts[i][0]
-      }
-    }
-    setInitials(initials)
+    var parts = name.split(" ");
+    var initials = parts[0][0] + parts[parts.length - 1][0];
+    return initials;
   }
-  useEffect(() => {
-    getInitials()
-  }, [])
-  return <div className={className}>
-    <div>{initials}</div>
-  </div>
+
+  return <div className={className}>{initials}</div>;
 }
 
-
 const Avatar = styled(_Avatar)`
-  > div {
-    display: flex;
-    height: 100px;
-    width: 100px;
-    cursor: pointer;
+  display: flex;
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
 
-    background-color: white;
-    border: 0.03em solid #a9a9a9;
+  font-size: 2.5rem;
+  font-family: "Asap";
+  text-transform: uppercase;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  --borderWidth: 3px;
+  background: white;
+  position: relative;
+  border-radius: 50%;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: calc(-1.1 * var(--borderWidth));
+    left: calc(-1.1 * var(--borderWidth));
+    height: calc(100% + var(--borderWidth) * 2.2);
+    width: calc(100% + var(--borderWidth) * 2.2);
+    background: linear-gradient(
+      60deg,
+      #f79533,
+      #f37055,
+      #ef4e7b,
+      #a166ab,
+      #5073b8,
+      #1098ad,
+      #07b39b,
+      #6fba82
+    );
     border-radius: 50%;
+    z-index: -1;
+    animation: animatedgradient 3s ease alternate infinite;
+    background-size: 300% 300%;
+  }
 
-    font-size: 2.5rem;
-    font-family: "Fira Sans", sans-serif;
-    text-transform: uppercase;
-
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  @keyframes animatedgradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 `;
 
 Avatar.defaultProps = {
   name: "",
-}
+};
 
 export default Avatar;

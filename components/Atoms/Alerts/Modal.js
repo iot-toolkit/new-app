@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { colors } from "../../../resources";
 
 const Title = styled.div`
+  font-family: "Asap";
   margin-top: 5%;
   text-align: center;
   font-size: 2.75em;

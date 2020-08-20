@@ -11,5 +11,5 @@ const Template = (args) => <Avatar {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-    name: text("Full name", "Marcello Bardus")
+  name: text("Full name", "Marcello Kurwa Bardus"),
 };
