@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import AlertContext, { AlertProvider } from "./Alert";
-import { number, text } from "@storybook/addon-knobs";
 import Button from "../Buttons";
+
+import AlertContext, { AlertProvider } from "./Alert";
 
 export default {
   title: "Design/Atoms/Alerts",
@@ -9,15 +9,15 @@ export default {
 };
 
 const ShowButton = () => {
-  const { show, hide } = useContext(AlertContext);
+  const { show } = useContext(AlertContext);
 
   const Button2 = () => (
     <Button
-      variant="secondary"
+      variant="confirm"
       onClick={() =>
         show({
           customHTML: <Button1 />,
-          height: 50,
+          height: "50px",
           duration: 2000,
           callback: () => console.log("button 1 callback"),
         })
@@ -29,12 +29,13 @@ const ShowButton = () => {
 
   const Button1 = () => (
     <Button
-      variant="secondary"
+      variant="cancel"
       onClick={() =>
         show({
-          customHTML: <Button2 />,
+          title: "Twoja stara",
+          body: "nie bo twoja",
+          buttons: [<Button1 />, <Button2 />],
           callback: () => console.log("button 2 callback"),
-          duration: 10000,
         })
       }
     >
@@ -45,7 +46,7 @@ const ShowButton = () => {
   return (
     <>
       <Button1 />
-      <Button variant="secondary">Just checking</Button>
+      <Button2 />
     </>
   );
 };

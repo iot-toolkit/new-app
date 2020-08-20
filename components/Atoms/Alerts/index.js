@@ -1,3 +1,4 @@
-import Alert from "./Alert";
+import AlertContext, { AlertProvider } from "./Alert";
 
-export default Alert;
+export default AlertContext;
+export { AlertProvider };

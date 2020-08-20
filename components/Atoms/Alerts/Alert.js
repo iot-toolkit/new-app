@@ -1,78 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { colors } from "../../../resources";
+import Modal from "./Modal";
 
 const AlertContext = React.createContext();
 export default AlertContext;
-
-const alertKeyframes = css`
-  @keyframes fadeIn {
-    0% {
-      background-position: 0%;
-      -webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0);
-      -moz-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0);
-      box-shadow: 0px 0px 40px 8px rgba(0, 0, 0, 0);
-    }
-    20% {
-      background-position: 20%;
-      -webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.02);
-      -moz-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.02);
-      box-shadow: 0px 0px 40px 8px rgba(0, 0, 0, 0.02);
-    }
-    100% {
-      background-position: 100%;
-      -webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.1);
-      -moz-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.1);
-      box-shadow: 0px 0px 40px 8px rgba(0, 0, 0, 0.1);
-    }
-  }
-
-  @keyframes fadeOut {
-    0% {
-      background-position: 100%;
-      -webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.1);
-      -moz-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.1);
-      box-shadow: 0px 0px 40px 8px rgba(0, 0, 0, 0.1);
-    }
-    20% {
-      background-position: 80%;
-      -webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.08);
-      -moz-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.08);
-      box-shadow: 0px 0px 40px 8px rgba(0, 0, 0, 0.08);
-    }
-    100% {
-      background-position: 0%;
-      -webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0);
-      -moz-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0);
-      box-shadow: 0px 0px 40px 8px rgba(0, 0, 0, 0);
-    }
-  }
-`;
-
-const Modal = styled.div`
-  ${({ customKeyframes }) => customKeyframes || alertKeyframes}
-  transition: height .25s ease, width .25s ease;
-
-  margin: 15vh auto;
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-
-  padding: 1.4em 3.3em;
-  border-radius: 6px;
-
-  -webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 40px 8px rgba(0, 0, 0, 0.1);
-
-  background: none;
-  background-image: linear-gradient(
-    45deg,
-    transparent 50%,
-    ${colors.primary} 50%
-  );
-  background-position: 100%;
-  background-size: 264%;
-`;
 
 function _Alert({
   visible,
@@ -131,21 +63,24 @@ function _Alert({
                 : "fadeOut .4s ease-out"
             }`,
           }}
+          title={title}
+          body={body}
+          buttons={buttons}
           onAnimationEnd={!duration ? handleAnimationEnd : () => {}}
-          ref={modal}
+          passRef={modal}
           height={height}
           width={width}
           position={position}
-          className={modalClassName}
-        >
-          {visible && customHTML}
-        </Modal>
+          modalClassName={modalClassName}
+          customHTML={customHTML}
+          visible={visible}
+        />
       </div>
     )
   );
 }
 
-export const Alert = styled(_Alert)`
+const Alert = styled(_Alert)`
   position: fixed;
   z-index: 999;
   height: 100vh;

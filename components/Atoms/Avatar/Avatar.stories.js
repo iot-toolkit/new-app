@@ -3,8 +3,8 @@ import Avatar from "./Avatar";
 import { number, text } from "@storybook/addon-knobs";
 
 export default {
-    title: "Design/Atoms/Avatar",
-    component: Avatar,
+  title: "Design/Atoms/Avatar",
+  component: Avatar,
 };
 
 const Template = (args) => <Avatar {...args} />;

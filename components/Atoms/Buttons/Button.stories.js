@@ -17,4 +17,9 @@ Secondary.args = {
   variant: "secondary",
 };
 
+export const Confirm = Template.bind({});
+Confirm.args = {
+  variant: "confirm",
+};
+
 export const Icon = () => <IconButton />;
