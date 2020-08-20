@@ -14,10 +14,10 @@ const reverse = { primary: colors.secondary, secondary: colors.primary };
 const keyframe = {
   default: keyframes`
   0% {
-      background-position: 100%;
+      background-position: 90%;
   }
   20% {
-    background-position: 90%;
+    background-position: 80%;
 }
   100% {
       background-position: 0%;
@@ -28,10 +28,10 @@ const keyframe = {
       background-position: 0%;
   }
   20% {
-    background-position: 10%;
+    background-position: 20%;
 }
   100% {
-      background-position: 100%;
+      background-position: 90%;
   }
 `,
 };

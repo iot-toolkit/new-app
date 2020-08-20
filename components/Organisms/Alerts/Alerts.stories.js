@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import Button from "../Buttons";
+import Button from "../../Atoms/Buttons";
 
 import AlertContext, { AlertProvider } from "./Alert";
 
 export default {
-  title: "Design/Atoms/Alerts",
+  title: "Design/Organisms/Alerts",
   component: AlertProvider,
 };
 
@@ -16,7 +16,9 @@ const ShowButton = () => {
       variant="confirm"
       onClick={() =>
         show({
-          customHTML: <Button1 />,
+          title: "Alert Title",
+          body: "Alert body",
+          buttons: [<Button1 />],
           height: "50px",
           duration: 2000,
           callback: () => console.log("button 1 callback"),
@@ -32,8 +34,8 @@ const ShowButton = () => {
       variant="cancel"
       onClick={() =>
         show({
-          title: "Twoja stara",
-          body: "nie bo twoja",
+          title: "Alert Title",
+          body: "Alert body",
           buttons: [<Button1 />, <Button2 />],
           callback: () => console.log("button 2 callback"),
         })
