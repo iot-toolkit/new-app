@@ -18,6 +18,10 @@ function Dropdown({ className, right, side, otherSide }) {
         <span onClick={handleDisplay}>Naciśnij mn</span>
         <div>
             <p>Hello World!</p>
+            <hr />
+            <p>Hello World!</p>
+            <p>Hello World!</p>
+
         </div>
     </_Dropdown>
 }
