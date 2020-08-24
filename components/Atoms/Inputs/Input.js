@@ -10,6 +10,7 @@ function _Input({
   width,
   height,
   raw,
+  transparent,
 }) {
   return raw ? (
     <span className={className}>
@@ -87,7 +88,7 @@ const Input = styled(_Input)`
   }
 
   .raw {
-    font-family: "Asap";
+    font-family: "Baloo 2";
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     border: none;
