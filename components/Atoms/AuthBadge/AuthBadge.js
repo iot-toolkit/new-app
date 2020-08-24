@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { GrDiamond } from "react-icons/gr";
 
-function _AuthBadge({ className, level }) {
+function _AuthBadge({ className, level, variant }) {
   return (
     <span className={className}>
       <GrDiamond />
@@ -13,13 +13,11 @@ function _AuthBadge({ className, level }) {
   );
 }
 
-const AuthBadge = styled(_AuthBadge)`
-  display: inline-flex;
-  align-items: center;
-
+const Dynamic = css`
   svg:hover + div {
     transform: translateX(3px);
     opacity: 1;
+    z-index: 10;
   }
 
   > div {
@@ -27,11 +25,32 @@ const AuthBadge = styled(_AuthBadge)`
     opacity: 0;
     top: 0;
     z-index: -20;
-    transition: transform 400ms ease-out, opacity 400ms linear;
-    font-family: "Baloo 2";
+    transition: transform 400ms ease-out, opacity 400ms linear,
+      z-index 500ms linear;
   }
 `;
 
-AuthBadge.defaultProps = { level: "0" };
+const Static = css`
+  > div {
+    transform: translateX(3px);
+    opacity: 1;
+    z-index: 10;
+    top: 0;
+  }
+`;
+
+const AuthBadge = styled(_AuthBadge)`
+  display: inline-flex;
+  align-items: center;
+
+  > div {
+    font-family: "Baloo 2";
+    cursor: default;
+  }
+
+  ${({ variant }) => (variant === "static" ? Static : Dynamic)}
+`;
+
+AuthBadge.defaultProps = { level: "0", variant: "dynamic" };
 
 export default AuthBadge;

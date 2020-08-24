@@ -15,6 +15,9 @@ Default.args = {};
 export const Long = Template.bind({});
 Long.args = { width: "500px" };
 
+export const Raw = Template.bind({});
+Raw.args = { value: "temperature", raw: true };
+
 export const Icon = Template.bind({});
 Icon.args = {
   icon: GiMassDriver,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function _Avatar({ className, name }) {
+function _Avatar({ className, name, size }) {
   const [initials, setInitials] = useState(getInitials());
 
   function getInitials() {
@@ -15,11 +15,12 @@ function _Avatar({ className, name }) {
 
 const Avatar = styled(_Avatar)`
   display: flex;
-  height: 100px;
-  width: 100px;
-  cursor: pointer;
+  min-height: ${({ size }) => size};
+  min-width: ${({ size }) => size};
 
-  font-size: 2.5rem;
+  cursor: default;
+
+  font-size: calc(${({ size }) => size} * 0.6);
   font-family: "Asap";
   text-transform: uppercase;
 

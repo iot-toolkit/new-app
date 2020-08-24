@@ -16,3 +16,6 @@ Admin.args = { level: "1" };
 
 export const MasterAdmin = Template.bind({});
 MasterAdmin.args = { level: "2" };
+
+export const Static = Template.bind({});
+Static.args = { variant: "static" };
