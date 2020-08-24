@@ -7,6 +7,7 @@ import {
 import { colors } from "../../../resources";
 import styled from "styled-components";
 import { IconButton } from "../../Atoms/Buttons";
+import { Input } from "../../Atoms/Inputs";
 
 const isObject = (data) => {
   return typeof data === "object";
@@ -59,7 +60,9 @@ function _Branch({ name, value, className }) {
         )}
         {name}
       </div>
-      <div>{isObject(value) ? dropdown && value : value}</div>
+      <div>
+        {isObject(value) ? dropdown && value : <Input raw value={value} />}
+      </div>
     </div>
   );
 }
@@ -67,6 +70,9 @@ function _Branch({ name, value, className }) {
 const Branch = styled(_Branch)`
   display: flex;
   flex-flow: ${({ value }) => (isObject(value) ? "column" : "row")} nowrap;
+  svg {
+    margin-right: 8px;
+  }
 
   > :nth-child(1) {
     display: flex;
@@ -77,6 +83,7 @@ const Branch = styled(_Branch)`
   > :nth-child(2) {
     display: flex;
     flex-flow: column nowrap;
+    margin-left: 32px;
   }
 `;
 
