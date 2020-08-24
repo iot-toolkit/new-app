@@ -20,7 +20,7 @@ const Avatar = styled(_Avatar)`
 
   cursor: default;
 
-  font-size: calc(${({ size }) => size} * 0.6);
+  font-size: calc(${({ size }) => size} * 0.75);
   font-family: "Asap";
   text-transform: uppercase;
 

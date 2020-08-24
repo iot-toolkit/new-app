@@ -46,6 +46,8 @@ const AuthBadge = styled(_AuthBadge)`
   > div {
     font-family: "Baloo 2";
     cursor: default;
+    display: flex;
+    flex-wrap: nowrap;
   }
 
   ${({ variant }) => (variant === "static" ? Static : Dynamic)}

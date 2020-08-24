@@ -11,7 +11,7 @@ function _ExpandedUsers({ className, width, value, name }) {
   return (
     <div className={className}>
       <div>
-        <Avatar name={name} size="40px" />
+        <Avatar name={name} size="25px" />
         <div>
           <span>{names}</span>
           <span>{surname}</span>
@@ -31,7 +31,7 @@ function _ExpandedAdmins({ className, width, value, name }) {
   return (
     <div className={className}>
       <div>
-        <Avatar name={name} size="40px" />
+        <Avatar name={name} size="25px" />
         <div>
           <span>{names}</span>
           <span>{surname}</span>
@@ -47,15 +47,28 @@ function _ExpandedAdmins({ className, width, value, name }) {
 const commonStyles = css`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: ${({ width }) => width}};
 
   > div {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+
     > div {
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-flow: column wrap;
+      padding: 8px;
     }
   }
+
+  > span {
+    padding: 8px;
+  }
+
+  > svg {
+    padding: 8px;
+  }
+
 `;
 
 const ExpandedUsers = styled(_ExpandedUsers)`
@@ -67,7 +80,7 @@ const ExpandedAdmins = styled(_ExpandedAdmins)`
 `;
 
 ExpandedUsers.defaultProps = {
-  width: "400px",
+  width: "450px",
 };
 
 ExpandedAdmins.defaultProps = {
