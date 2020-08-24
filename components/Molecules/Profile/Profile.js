@@ -1,5 +1,6 @@
 import React from "react";
+import Avatar from "../../Atoms/Avatar";
 
-export default function Profile() {
-  return <div></div>;
+export default function Profile({ name }) {
+  return <Avatar name={name} />;
 }

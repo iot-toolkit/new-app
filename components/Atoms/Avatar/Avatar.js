@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function _Avatar({ className, name }) {
+function _Avatar({ className, name, size }) {
   const [initials, setInitials] = useState(getInitials());
 
   function getInitials() {
     var parts = name.split(" ");
+    console.log(parts);
+    if (parts[0].length < 1) return "--";
+    if (parts.length < 2) return parts[0][0];
     var initials = parts[0][0] + parts[parts.length - 1][0];
     return initials;
   }
@@ -15,11 +18,12 @@ function _Avatar({ className, name }) {
 
 const Avatar = styled(_Avatar)`
   display: flex;
-  height: 100px;
-  width: 100px;
-  cursor: pointer;
+  min-height: ${({ size }) => size};
+  min-width: ${({ size }) => size};
 
-  font-size: 2.5rem;
+  cursor: default;
+
+  font-size: calc(${({ size }) => size} * 0.75);
   font-family: "Asap";
   text-transform: uppercase;
 
@@ -70,7 +74,7 @@ const Avatar = styled(_Avatar)`
 `;
 
 Avatar.defaultProps = {
-  name: "",
+  name: "Janush Kovalsky",
 };
 
 export default Avatar;

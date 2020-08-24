@@ -33,14 +33,14 @@ export default class _Document extends Document {
       <Html>
         <Head>
           <link
-            href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&family=Asap&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Asap&display=swap"
             rel="stylesheet"
           />
           <style global jsx>
             {`
               body,
               html {
-                font-family: "Baloo Tamma 2", cursive;
+                font-family: "Asap", cursive;
               }
             `}
           </style>

@@ -4,26 +4,24 @@ import { colors } from "../../../resources";
 
 const Title = styled.div`
   font-family: "Asap";
-  margin-top: 5%;
   text-align: center;
   font-size: 2.75em;
   height: 1.2em;
-  width: 100%;
+  min-height: 1.2em;
 `;
 
 const Body = styled.div`
-  margin: 7.5% 3% 7.5% 3%;
-  height: calc(45% - 3.3em);
-  width: 94%;
+  margin: 0 3% 0 3%;
+  min-height: 30%;
 `;
 
 const Buttons = styled.div`
   height: 30%;
-  width: 100%;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  min-height: 2em;
 `;
 
 function _Modal({
@@ -83,6 +81,7 @@ const alertKeyframes = css`
       background-position: 100%;
     }
     20% {
+      color: ${colors.whitegrey};
       background-position: 80%;
     }
     75% {
@@ -91,6 +90,7 @@ const alertKeyframes = css`
       box-shadow: 0px 0px 40px 8px rgba(0, 0, 0, 0.1);
     }
     100% {
+      color: ${colors.primary};
       background-position: 0%;
       -webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0);
       -moz-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0);
@@ -123,6 +123,13 @@ const Modal = styled(_Modal)`
   );
   background-position: 100%;
   background-size: 264%;
+
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-content: stretch;
+  position: relative;
+  overflow-y: hidden;
 `;
 
 export default Modal;
