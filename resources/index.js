@@ -7,6 +7,7 @@ const colors = {
   cancel: "rgba(255, 40, 0, 0.8)",
   whitegrey: "#ececec",
   overlay: "rgba(236,236,236, 0.8)",
+  blue: "rgb(0, 128, 255)",
 };
 
 const reverse = { primary: colors.secondary, secondary: colors.primary };

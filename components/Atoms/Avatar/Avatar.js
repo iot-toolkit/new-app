@@ -6,6 +6,9 @@ function _Avatar({ className, name }) {
 
   function getInitials() {
     var parts = name.split(" ");
+    console.log(parts);
+    if (parts[0].length < 1) return "--";
+    if (parts.length < 2) return parts[0][0];
     var initials = parts[0][0] + parts[parts.length - 1][0];
     return initials;
   }
@@ -70,7 +73,7 @@ const Avatar = styled(_Avatar)`
 `;
 
 Avatar.defaultProps = {
-  name: "",
+  name: "Janush Kovalsky",
 };
 
 export default Avatar;
