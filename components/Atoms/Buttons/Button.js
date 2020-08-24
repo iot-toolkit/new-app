@@ -4,6 +4,8 @@ import { colors, keyframes } from "../../../resources";
 const { whitegrey } = colors;
 
 const Button = styled.button`
+  font-family: "Asap";
+  font-weight: 700;
   font-size: 0.75rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -30,7 +32,7 @@ const Button = styled.button`
 
   &:hover:not(:active) {
     color: ${whitegrey};
-    background-position: 100%;
+    background-position: 90%;
   }
 
   &:focus {
@@ -38,8 +40,8 @@ const Button = styled.button`
   }
 
   &:active {
-    transition: background 250ms ease-in-out;
-    background-position: 25%%;
+    transition: background 100ms ease-in-out;
+    background-position: 25%;
   }
 `;
 
