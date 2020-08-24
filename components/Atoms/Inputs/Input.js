@@ -9,24 +9,30 @@ function _Input({
   type,
   width,
   height,
+  raw,
 }) {
-  return Icon ? (
+  return raw ? (
     <span className={className}>
-      <input value={value} type={type} />
+      <input className="raw" value={value} type={type} />
+      <div className="border" />
+    </span>
+  ) : Icon ? (
+    <span className={className}>
+      <input className="new" value={value} type={type} />
       <span className="underline" />
       <div className="blur" />
       <Icon color="white" />
     </span>
   ) : Placeholder ? (
     <span className={className}>
-      <input value={value} type={type} />
+      <input className="new" value={value} type={type} />
       <span className="underline" />
       <div className="blur" />
       <span className="placeholder">{Placeholder}</span>
     </span>
   ) : (
     <span className={className}>
-      <input value={value} type={type} />
+      <input className="new" value={value} type={type} />
       <span className="underline" />
     </span>
   );
@@ -40,7 +46,8 @@ const Input = styled(_Input)`
   display: inline-block;
   height: ${({ height }) => height};
 
-  > input {
+  .new {
+    font-family: "Asap";
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     color: ${whitegrey};
@@ -74,9 +81,33 @@ const Input = styled(_Input)`
     z-index: 2;
     visibility: visible;
     opacity: 1;
-    transition: visibility 600s, opacity 600ms ease-in-out;
+    transition: visibility 600ms, opacity 600ms ease-in-out;
     pointer-events: none;
     transition-delay: 300ms;
+  }
+
+  .raw {
+    font-family: "Asap";
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .border {
+    border-bottom: 0.01em solid;
+    position: absolute;
+    left: 0;
+    right: 100%;
+    transition: right 500ms ease-in-out;
+  }
+
+  .raw:focus + .border {
+    border-bottom: 0.01em solid;
+    right: 0;
   }
 
   .placeholder {
@@ -88,6 +119,8 @@ const Input = styled(_Input)`
     display: flex;
     align-items: center;
     color: white;
+    font-family: "Baloo 2";
+    text-transform: lowercase;
     pointer-events: none;
     visibility: visible;
     opacity: 1;
@@ -159,6 +192,7 @@ const Input = styled(_Input)`
 Input.defaultProps = {
   value: "",
   type: "text",
+  raw: false,
   icon: null,
   placeholder: null,
   width: "200px",

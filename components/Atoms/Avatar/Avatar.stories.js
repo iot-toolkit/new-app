@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "./Avatar";
-import { number, text } from "@storybook/addon-knobs";
+import { text } from "@storybook/addon-knobs";
 
 export default {
   title: "Design/Atoms/Avatar",

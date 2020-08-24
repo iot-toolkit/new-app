@@ -1,2 +1,4 @@
-import Admin from "./Admin";
-import User from "./User";
+import { Users, Admins } from "./Users";
+import { ExpandedUsers, ExpandedAdmins } from "./ExpandedUsers";
+
+export { Users, Admins, ExpandedUsers, ExpandedAdmins };
