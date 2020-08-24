@@ -17,11 +17,14 @@ function _Input({
   const resizable = useRef(null);
 
   useEffect(() => {
-    const size = resizable.current.value.length;
-    if (size === 0) {
-      setSize(1);
-    } else {
-      setSize(size);
+    const current = resizable.current;
+    if (current) {
+      const size = current.value.length;
+      if (size === 0) {
+        setSize(1);
+      } else {
+        setSize(size);
+      }
     }
   }, []);
 
@@ -53,21 +56,36 @@ function _Input({
     </span>
   ) : Icon ? (
     <span className={className}>
-      <input className="new" value={value} type={type} />
+      <input
+        className="new"
+        value={Value}
+        type={type}
+        onChange={handleChange}
+      />
       <span className="underline" />
       <div className="blur" />
       <Icon color="white" />
     </span>
   ) : Placeholder ? (
     <span className={className}>
-      <input className="new" value={value} type={type} />
+      <input
+        className="new"
+        value={Value}
+        type={type}
+        onChange={handleChange}
+      />
       <span className="underline" />
       <div className="blur" />
       <span className="placeholder">{Placeholder}</span>
     </span>
   ) : (
     <span className={className}>
-      <input className="new" value={value} type={type} />
+      <input
+        className="new"
+        value={Value}
+        type={type}
+        onChange={handleChange}
+      />
       <span className="underline" />
     </span>
   );
