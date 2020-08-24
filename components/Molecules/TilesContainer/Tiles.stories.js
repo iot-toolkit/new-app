@@ -1,5 +1,5 @@
 import React from "react";
-import Tile, { Head } from "../../Atoms/Tile";
+import Tile, { Head } from "atoms/Tile";
 import TilesContainer from "./TilesContainer";
 import { number } from "@storybook/addon-knobs";
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { colors } from "../../../resources";
+import { colors } from "resources";
 import Modal from "./Modal";
 
 const AlertContext = React.createContext();

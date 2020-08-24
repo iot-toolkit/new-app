@@ -10,29 +10,59 @@ function _Input({
   width,
   height,
   raw,
+  onChange,
+  number,
 }) {
+  const handleChange = (e) => {
+    if (number) {
+      onChange({ target: { value: Number(e.target.value) } });
+    } else {
+      onChange(e);
+    }
+  };
+
   return raw ? (
     <span className={className}>
-      <input className="raw" value={value} type={type} />
+      <input
+        className="raw"
+        value={value}
+        type={type}
+        onChange={handleChange}
+      />
       <div className="border" />
     </span>
   ) : Icon ? (
     <span className={className}>
-      <input className="new" value={value} type={type} />
+      <input
+        className="new"
+        value={value}
+        type={type}
+        onChange={handleChange}
+      />
       <span className="underline" />
       <div className="blur" />
       <Icon color="white" />
     </span>
   ) : Placeholder ? (
     <span className={className}>
-      <input className="new" value={value} type={type} />
+      <input
+        className="new"
+        value={value}
+        type={type}
+        onChange={handleChange}
+      />
       <span className="underline" />
       <div className="blur" />
       <span className="placeholder">{Placeholder}</span>
     </span>
   ) : (
     <span className={className}>
-      <input className="new" value={value} type={type} />
+      <input
+        className="new"
+        value={value}
+        type={type}
+        onChange={handleChange}
+      />
       <span className="underline" />
     </span>
   );
@@ -197,6 +227,7 @@ Input.defaultProps = {
   placeholder: null,
   width: "200px",
   height: "40px",
+  number: false,
 };
 
 export default Input;

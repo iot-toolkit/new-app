@@ -20,6 +20,8 @@ const Avatar = styled(_Avatar)`
   display: flex;
   min-height: ${({ size }) => size};
   min-width: ${({ size }) => size};
+  height: ${({ size }) => size};
+  width: ${({ size }) => size};
 
   cursor: default;
 
@@ -75,6 +77,7 @@ const Avatar = styled(_Avatar)`
 
 Avatar.defaultProps = {
   name: "Janush Kovalsky",
+  size: "5em",
 };
 
 export default Avatar;

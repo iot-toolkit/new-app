@@ -1,7 +1,7 @@
 import React from "react";
 import { FaBell } from "react-icons/fa";
 import styled from "styled-components";
-import { colors, reverse } from "../../../resources";
+import { colors, reverse } from "resources";
 
 function _IconButton({ className, icon }) {
   return <div className={className}>{icon}</div>;

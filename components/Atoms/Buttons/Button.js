@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, keyframes } from "../../../resources";
+import { colors, keyframes } from "resources";
 
 const { whitegrey } = colors;
 
