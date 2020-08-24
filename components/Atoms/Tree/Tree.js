@@ -7,7 +7,7 @@ import {
 import { colors } from "../../../resources";
 import styled from "styled-components";
 import { IconButton } from "../../Atoms/Buttons";
-import { Input } from "../../Atoms/Inputs";
+import Input from "../../Atoms/Inputs";
 
 const isObject = (data) => {
   return typeof data === "object";
@@ -61,7 +61,11 @@ function _Branch({ name, value, className }) {
         {name}
       </div>
       <div>
-        {isObject(value) ? dropdown && value : <Input raw value={value} />}
+        {isObject(value) ? (
+          dropdown && value
+        ) : (
+          <Input raw value={value} height="18px" />
+        )}
       </div>
     </div>
   );

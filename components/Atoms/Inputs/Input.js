@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 function _Input({
@@ -12,9 +12,43 @@ function _Input({
   raw,
   transparent,
 }) {
+  const [Value, setValue] = useState(value);
+  const [Size, setSize] = useState(1);
+  const resizable = useRef(null);
+
+  useEffect(() => {
+    const size = resizable.current.value.length;
+    if (size === 0) {
+      setSize(1);
+    } else {
+      setSize(size);
+    }
+  }, []);
+
+  function handleChange(e) {
+    e.preventDefault();
+
+    const _value = e.target.value;
+    const size = _value.length;
+
+    if (size === 0) {
+      setSize(1);
+    } else {
+      setSize(size);
+    }
+    setValue(_value);
+  }
+
   return raw ? (
     <span className={className}>
-      <input className="raw" value={value} type={type} />
+      <input
+        size={Size}
+        ref={resizable}
+        className="raw"
+        value={Value}
+        type={type}
+        onChange={handleChange}
+      />
       <div className="border" />
     </span>
   ) : Icon ? (
@@ -88,10 +122,12 @@ const Input = styled(_Input)`
   }
 
   .raw {
+    height: inherit;
     font-family: "Baloo 2";
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     border: none;
+    background: transparent;
 
     &:focus {
       outline: none;
@@ -99,16 +135,19 @@ const Input = styled(_Input)`
   }
 
   .border {
-    border-bottom: 0.01em solid;
+    height: inherit;
+    width: inherit;
+    border-bottom: 0.01em solid ${whitegrey};
     position: absolute;
     left: 0;
-    right: 100%;
-    transition: right 500ms ease-in-out;
+    right: 0;
+    top: 0;
+    z-index: -20;
+    transition: border-bottom 500ms ease-in-out;
   }
 
   .raw:focus + .border {
-    border-bottom: 0.01em solid;
-    right: 0;
+    border-bottom: 0.01em solid ${darkgrey};
   }
 
   .placeholder {
