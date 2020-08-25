@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Button from "../../Atoms/Buttons";
+import Button from "atoms/Buttons";
 
 import AlertContext, { AlertProvider } from "./Alert";
 

@@ -2,11 +2,11 @@ import React from "react";
 import Tree from "./Tree";
 
 export default {
-  title: "Design/Atoms/Tree",
+  title: "Design/Organisms/Tree",
   component: Tree,
 };
 
-const data = {
+var data = {
   runtime: {},
   flowMeasurementTime: 1,
   temperatureMeasurementTime: 0.5,
@@ -67,9 +67,12 @@ const data = {
   ],
 };
 
+const setData = (_data) => (data = _data);
+
 const Template = (args) => <Tree {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  data: data,
+  data,
+  setData,
 };

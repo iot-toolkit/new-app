@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-// import { DataContainer } from "../../containers";
+// import { DataContainer } from "containers";
 
 const _Layout = styled.div`
   margin: 32px 25vw 16px 25vw;

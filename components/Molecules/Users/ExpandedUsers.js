@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import AuthBadge from "../../Atoms/AuthBadge";
-import Avatar from "../../Atoms/Avatar";
+import AuthBadge from "atoms/AuthBadge";
+import Avatar from "atoms/Avatar";
 import { AiOutlineMessage } from "react-icons/ai";
 
 function _ExpandedUsers({ className, width, value, name }) {

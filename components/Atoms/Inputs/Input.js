@@ -11,8 +11,9 @@ function _Input({
   height,
   raw,
   transparent,
+  onChange,
+  number,
 }) {
-  const [Value, setValue] = useState(value);
   const [Size, setSize] = useState(1);
   const resizable = useRef(null);
 
@@ -34,12 +35,17 @@ function _Input({
     const _value = e.target.value;
     const size = _value.length;
 
+    if (number) {
+      onChange({ target: { value: Number(_value) } });
+    } else {
+      onChange(e);
+    }
+
     if (size === 0) {
       setSize(1);
     } else {
       setSize(size);
     }
-    setValue(_value);
   }
 
   return raw ? (
@@ -48,7 +54,7 @@ function _Input({
         size={Size}
         ref={resizable}
         className="raw"
-        value={Value}
+        value={value}
         type={type}
         onChange={handleChange}
       />
@@ -58,7 +64,7 @@ function _Input({
     <span className={className}>
       <input
         className="new"
-        value={Value}
+        value={value}
         type={type}
         onChange={handleChange}
       />
@@ -70,7 +76,7 @@ function _Input({
     <span className={className}>
       <input
         className="new"
-        value={Value}
+        value={value}
         type={type}
         onChange={handleChange}
       />
@@ -82,7 +88,7 @@ function _Input({
     <span className={className}>
       <input
         className="new"
-        value={Value}
+        value={value}
         type={type}
         onChange={handleChange}
       />
@@ -255,6 +261,7 @@ Input.defaultProps = {
   placeholder: null,
   width: "200px",
   height: "40px",
+  number: false,
 };
 
 export default Input;

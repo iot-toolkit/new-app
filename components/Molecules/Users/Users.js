@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import AuthBadge from "../../Atoms/AuthBadge";
+import AuthBadge from "atoms/AuthBadge";
 import { AiOutlineMessage } from "react-icons/ai";
 
 function _Users({ className, width, value }) {
