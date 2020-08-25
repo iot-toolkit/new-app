@@ -15,18 +15,19 @@ function _AuthBadge({ className, level, variant }) {
 
 const Dynamic = css`
   svg:hover + div {
-    transform: translateX(3px);
+    transform: scaleX(1);
     opacity: 1;
     z-index: 10;
+    margin-left: 3px;
   }
 
   > div {
-    transform: translateX(-15px);
+    transform: scaleX(0);
+    transform-origin: left;
     opacity: 0;
-    top: 0;
-    z-index: -20;
-    transition: transform 400ms ease-out, opacity 400ms linear,
-      z-index 500ms linear;
+    margin-left: 0;
+    transition: margin-left 400ms, transform 400ms ease-out,
+      opacity 400ms linear;
   }
 `;
 
@@ -35,7 +36,6 @@ const Static = css`
     transform: translateX(3px);
     opacity: 1;
     z-index: 10;
-    top: 0;
   }
 `;
 

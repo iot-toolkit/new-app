@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
+import { colors } from "resources";
 
 function _Input({
   value,
@@ -97,9 +98,6 @@ function _Input({
   );
 }
 
-const darkgrey = "#333";
-const whitegrey = "#ececec";
-
 const Input = styled(_Input)`
   position: relative;
   display: inline-block;
@@ -109,9 +107,9 @@ const Input = styled(_Input)`
     font-family: "Asap";
     font-size: 0.75rem;
     letter-spacing: 0.1em;
-    color: ${whitegrey};
+    color: ${colors.whitegrey};
 
-    border: 0.1em solid ${darkgrey};
+    border: 0.1em solid ${colors.primary};
     border-radius: 8px;
 
     padding: 0.8em 1em;
@@ -122,13 +120,17 @@ const Input = styled(_Input)`
     transition: background 600ms ease-in-out, color 600ms ease-in-out;
 
     background: none;
-    background-image: linear-gradient(45deg, transparent 50%, ${darkgrey} 50%);
+    background-image: linear-gradient(
+      45deg,
+      transparent 50%,
+      ${colors.primary} 50%
+    );
     background-position: 100%;
     background-size: 400%;
 
     &:focus {
       outline: none;
-      color: ${darkgrey};
+      color: ${colors.primary};
       background-position: 25%;
     }
   }
@@ -161,17 +163,17 @@ const Input = styled(_Input)`
   .border {
     height: inherit;
     width: inherit;
-    border-bottom: 0.01em solid ${whitegrey};
+    border-bottom: 0.1em solid ${colors.whitegrey};
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     z-index: -20;
-    transition: border-bottom 500ms ease-in-out;
+    transition: border-bottom 500ms linear;
   }
 
   .raw:focus + .border {
-    border-bottom: 0.01em solid ${darkgrey};
+    border-bottom: 0.1em solid ${colors.darkgrey};
   }
 
   .placeholder {
@@ -241,8 +243,12 @@ const Input = styled(_Input)`
 
     transition: background 600ms ease-in-out, width 600ms ease-in-out;
 
-    background: ${darkgrey};
-    background-image: linear-gradient(45deg, transparent 50%, ${whitegrey} 50%);
+    background: ${colors.primary};
+    background-image: linear-gradient(
+      45deg,
+      transparent 50%,
+      ${colors.whitegrey} 50%
+    );
     background-position: 100%;
     background-size: 400%;
   }
