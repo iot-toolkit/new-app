@@ -24,22 +24,29 @@ const Navbar = styled(_Navbar)`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  align-items: center;
 
   > :nth-child(1) {
     margin-left: 32px;
   }
 
   > :nth-child(2) {
-    max-width: 50%;
+    max-width: 40%;
   }
 
   > :nth-child(3) {
-    margin-right: 24px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    > :nth-child(n) {
+      margin-right: 24px;
+    }
   }
 
   @media screen and (max-width: 992px) {
     > :nth-child(2) {
-      max-width: 70%;
+      max-width: 50%;
     }
   }
 

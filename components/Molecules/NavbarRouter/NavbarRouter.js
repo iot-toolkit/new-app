@@ -25,8 +25,8 @@ const _NavbarRouter = styled.div`
     background: black;
     position: absolute;
     bottom: 0;
-    left: calc(25% * ${({ chosen }) => chosen} + 7.5%);
-    width: 10%;
+    left: calc(25% * ${({ chosen }) => chosen} + 2.5%);
+    width: 20%;
     height: 1px;
   }
 `;

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 import { RiHome3Line } from "react-icons/ri";
 import { AiOutlineRobot, AiOutlineDashboard } from "react-icons/ai";
 import { HiOutlineSupport } from "react-icons/hi";
@@ -12,13 +13,16 @@ function _NavbarEntry({ className, page, size, id, onClick }) {
     <AiOutlineDashboard size={size} />,
     <HiOutlineSupport size={size} />,
   ];
+  const links = ["", "machines", "readings", "support"];
   return (
-    <div className={className} onClick={handleClick}>
-      <div>
-        {icons[id]}
-        <div>{page}</div>
+    <Link href={"/" + links[id]}>
+      <div className={className} onClick={handleClick}>
+        <div>
+          {icons[id]}
+          <div>{page}</div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -40,7 +44,7 @@ const NavbarEntry = styled(_NavbarEntry)`
 `;
 
 NavbarEntry.defaultProps = {
-  size: "5vh",
+  size: "3vh",
 };
 
 export default NavbarEntry;
