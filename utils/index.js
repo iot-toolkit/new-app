@@ -16,7 +16,7 @@ export const isObject = (data) => {
 };
 
 export const updateObjectUsingPath = (object, [...keys], value) => {
-  var last = keys.pop();
+  const last = keys.pop();
   var _object = { ...object };
   keys.reduce((o, k) => o[k], _object)[last] = value;
   return _object;

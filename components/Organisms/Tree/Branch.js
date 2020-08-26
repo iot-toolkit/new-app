@@ -7,7 +7,7 @@ import {
 import { colors } from "resources";
 import styled from "styled-components";
 import { IconButton } from "atoms/Buttons";
-import { Input } from "atoms/Inputs";
+import Input from "atoms/Inputs";
 import { isObject, updateObjectUsingPath } from "utils";
 import { DataContext } from "./Tree";
 
@@ -18,11 +18,16 @@ function _Branch({ name, value: _value, className, query, original }) {
   const { data, setData } = useContext(DataContext);
 
   useEffect(() => {
+    console.log(query, value);
     setData(updateObjectUsingPath(data, query, value));
   }, [value]);
 
   const toggleDropdown = () => setDropdown(!dropdown);
-  const handleChange = (e) => setValue(e.target.value);
+  const handleChange = (e) => {
+    const _value = e.target.value;
+    if (!isNaN(value)) setValue(Number(_value));
+    else setValue(_value);
+  };
 
   return (
     <div className={className}>
@@ -52,7 +57,7 @@ function _Branch({ name, value: _value, className, query, original }) {
             raw
             value={value}
             height="18px"
-            number={!isNaN(value)}
+            type={!isNaN(value) && "number"}
             onChange={handleChange}
           />
         )}

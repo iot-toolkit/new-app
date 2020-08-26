@@ -14,7 +14,7 @@ const renderRoots = (data, query, original) => {
         {val.description || handleExceptions(idx)}
       </Root>
     ));
-  } else if (isObject(data)) {
+  } else {
     return Object.keys(data).map((val, idx) => (
       <Root
         key={idx}

@@ -4,36 +4,29 @@ import NavbarEntry from "./NavbarEntry";
 
 function NavbarRouter() {
   const [Chosen, setChosen] = useState(0);
-  const handleClick = (chosen) => {
-    setChosen(chosen);
-  };
   return (
     <_NavbarRouter chosen={Chosen}>
-      <NavbarEntry onClick={() => handleClick(0)} page="dashboard" />
-      <NavbarEntry onClick={() => handleClick(1)} page="machines" />
-      <NavbarEntry onClick={() => handleClick(2)} page="readings" />
-      <NavbarEntry onClick={() => handleClick(3)} page="support" />
+      <NavbarEntry id={0} onClick={setChosen} page="dashboard" />
+      <NavbarEntry id={1} onClick={setChosen} page="machines" />
+      <NavbarEntry id={2} onClick={setChosen} page="readings" />
+      <NavbarEntry id={3} onClick={setChosen} page="support" />
     </_NavbarRouter>
   );
 }
 
 const _NavbarRouter = styled.div`
-  display: flex;
-  height: 100%;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  align-content: stretch;
-  font-family: "Baloo 2";
-
+  text-align: justify;
   position: relative;
+  width: 100%;
 
   &:after {
+    transition: left 300ms ease;
     content: "";
     background: black;
     position: absolute;
     bottom: 0;
-    left: calc(25% * ${({ chosen }) => chosen});
-    width: 25%;
+    left: calc(25% * ${({ chosen }) => chosen} + 7.5%);
+    width: 10%;
     height: 1px;
   }
 `;

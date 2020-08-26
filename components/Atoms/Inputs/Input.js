@@ -18,45 +18,26 @@ function _Input({
   const resizable = useRef(null);
 
   useEffect(() => {
-    const current = resizable.current;
-    if (current) {
-      const size = current.value.length;
-      if (size === 0) {
-        setSize(1);
-      } else {
-        setSize(size);
-      }
-    }
+    resizable.current && setSize(resizable.current.value.length || 1);
   }, []);
 
   function handleChange(e) {
     e.preventDefault();
+    const size = String(e.target.value).length;
 
-    const _value = e.target.value;
-    const size = _value.length;
-
-    if (number) {
-      onChange({ target: { value: Number(_value) } });
-    } else {
-      onChange(e);
-    }
-
-    if (size === 0) {
-      setSize(1);
-    } else {
-      setSize(size);
-    }
+    setSize(size);
+    onChange(e);
   }
 
   return raw ? (
     <span className={className}>
       <input
-        size={Size}
         ref={resizable}
         className="raw"
         value={value}
         type={type}
         onChange={handleChange}
+        style={{ width: "calc(" + Size + " * 0.65em)" }}
       />
       <div className="border" />
     </span>
@@ -105,6 +86,16 @@ const Input = styled(_Input)`
   display: inline-block;
   height: ${({ height }) => height};
 
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
   .new {
     font-family: "Asap";
     font-size: 0.75rem;
@@ -146,6 +137,7 @@ const Input = styled(_Input)`
   }
 
   .raw {
+    min-width: 2em;
     height: inherit;
     font-family: "Baloo 2";
     font-size: 0.75rem;

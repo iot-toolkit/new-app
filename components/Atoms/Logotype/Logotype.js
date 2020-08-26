@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Logotype() {
-  return <div></div>;
+  return <div>IoT Toolkit</div>;
 }
