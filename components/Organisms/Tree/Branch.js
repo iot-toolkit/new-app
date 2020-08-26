@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import {
   AiOutlinePlusSquare,
   AiOutlineMinusSquare,
@@ -15,6 +15,8 @@ function Branch({ name, value: _value, query, original }) {
   const [dropdown, setDropdown] = useState(false);
   const [value, setValue] = useState(_value);
 
+  const collapsible = useRef(null);
+
   const { data, setData } = useContext(DataContext);
 
   useEffect(() => {
@@ -24,27 +26,68 @@ function Branch({ name, value: _value, query, original }) {
   const toggleDropdown = () => setDropdown(!dropdown);
   const handleChange = (e) => setValue(e.target.value);
 
+  function collapseSection(element) {
+    var sectionHeight = element.scrollHeight;
+
+    var elementTransition = element.style.transition;
+    element.style.transition = "";
+
+    requestAnimationFrame(function () {
+      element.style.height = sectionHeight + "px";
+      element.style.transition = elementTransition;
+
+      requestAnimationFrame(function () {
+        element.style.height = 0 + "px";
+      });
+    });
+
+    element.setAttribute("data-collapsed", "true");
+  }
+
+  function expandSection(element) {
+    var sectionHeight = element.scrollHeight;
+
+    element.style.height = sectionHeight + "px";
+
+    element.setAttribute("data-collapsed", "false");
+  }
+
+  function handleClick() {
+    setDropdown(!dropdown);
+
+    var current = collapsible.current;
+    var isNotCollapsed = current.getAttribute("data-collapsed") === "false";
+
+    if (isNotCollapsed) {
+      collapseSection(current);
+      current.setAttribute("data-collapsed", "true");
+    } else {
+      expandSection(current);
+    }
+
+    console.log(collapsible);
+    console.log(current);
+  }
+
   return (
     <_Branch value={_value} original={original} dropdown={dropdown}>
       <div>
         {dropdown ? (
           <IconButton
             color={colors.blue}
-            icon={
-              <AiOutlineMinusSquare size={"1em"} onClick={toggleDropdown} />
-            }
+            icon={<AiOutlineMinusSquare size={"1em"} onClick={handleClick} />}
           />
         ) : isObject(value) ? (
           <IconButton
             color={colors.blue}
-            icon={<AiOutlinePlusSquare size={"1em"} onClick={toggleDropdown} />}
+            icon={<AiOutlinePlusSquare size={"1em"} onClick={handleClick} />}
           />
         ) : (
           <AiOutlineCloseSquare size={"1em"} color={colors.secondary} />
         )}
         {name}
       </div>
-      <div>
+      <div ref={collapsible}>
         {isObject(value) ? (
           value
         ) : (
@@ -65,9 +108,6 @@ const _Branch = styled.div`
   display: flex;
   flex-flow: ${({ value }) => (isObject(value) ? "column" : "row")} nowrap;
   margin: 8px 0 8px 0;
-  position: relative;
-  background: white;
-  z-index: 10;
 
   svg {
     margin-right: 8px;
@@ -83,26 +123,15 @@ const _Branch = styled.div`
     display: flex;
     flex-flow: column nowrap;
     margin-left: 32px;
+
     ${({ value }) =>
       isObject(value) &&
       `
-        z-index: -20;
-        visibility: hidden; 
-        position: fixed; 
+        overflow: hidden;
+        transition: height 0.3s ease-out;
         height: 0px;
-        transition: height 600ms linear;
-      `};
+      `}
   }
-
-  ${({ dropdown }) =>
-    dropdown &&
-    `
-      > :nth-child(2) {
-        visibility: visible;
-        position: relative;
-        height: 200px;
-      }
-    `};
 
   ${({ original }) =>
     !original &&
@@ -113,7 +142,7 @@ const _Branch = styled.div`
         position: absolute;
         border-left: 1px dashed ${colors.primary};
         position: absolute;
-        height: 130%;
+        height: 170%;
         left: -8px;
       }
     `};
