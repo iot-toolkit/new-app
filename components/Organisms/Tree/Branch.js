@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import {
   AiOutlinePlusSquare,
   AiOutlineMinusSquare,
@@ -11,9 +11,11 @@ import Input from "atoms/Inputs";
 import { isObject, updateObjectUsingPath } from "utils";
 import { DataContext } from "./Tree";
 
-function _Branch({ name, value: _value, className, query, original }) {
+function Branch({ name, value: _value, query, original }) {
   const [dropdown, setDropdown] = useState(false);
   const [value, setValue] = useState(_value);
+
+  const collapsible = useRef(null);
 
   const { data, setData } = useContext(DataContext);
 
@@ -29,29 +31,70 @@ function _Branch({ name, value: _value, className, query, original }) {
     else setValue(_value);
   };
 
+  function collapseSection(element) {
+    var sectionHeight = element.scrollHeight;
+
+    var elementTransition = element.style.transition;
+    element.style.transition = "";
+
+    requestAnimationFrame(function () {
+      element.style.height = sectionHeight + "px";
+      element.style.transition = elementTransition;
+
+      requestAnimationFrame(function () {
+        element.style.height = 0 + "px";
+      });
+    });
+
+    element.setAttribute("data-collapsed", "true");
+  }
+
+  function expandSection(element) {
+    var sectionHeight = element.scrollHeight;
+
+    element.style.height = sectionHeight + "px";
+
+    element.setAttribute("data-collapsed", "false");
+  }
+
+  function handleClick() {
+    setDropdown(!dropdown);
+
+    var current = collapsible.current;
+    var isNotCollapsed = current.getAttribute("data-collapsed") === "false";
+
+    if (isNotCollapsed) {
+      collapseSection(current);
+      current.setAttribute("data-collapsed", "true");
+    } else {
+      expandSection(current);
+    }
+
+    console.log(collapsible);
+    console.log(current);
+  }
+
   return (
-    <div className={className}>
+    <_Branch value={_value} original={original} dropdown={dropdown}>
       <div>
         {dropdown ? (
           <IconButton
             color={colors.blue}
-            icon={
-              <AiOutlineMinusSquare size={"1em"} onClick={toggleDropdown} />
-            }
+            icon={<AiOutlineMinusSquare size={"1em"} onClick={handleClick} />}
           />
         ) : isObject(value) ? (
           <IconButton
             color={colors.blue}
-            icon={<AiOutlinePlusSquare size={"1em"} onClick={toggleDropdown} />}
+            icon={<AiOutlinePlusSquare size={"1em"} onClick={handleClick} />}
           />
         ) : (
           <AiOutlineCloseSquare size={"1em"} color={colors.secondary} />
         )}
         {name}
       </div>
-      <div>
+      <div ref={collapsible}>
         {isObject(value) ? (
-          dropdown && value
+          value
         ) : (
           <Input
             raw
@@ -62,13 +105,15 @@ function _Branch({ name, value: _value, className, query, original }) {
           />
         )}
       </div>
-    </div>
+    </_Branch>
   );
 }
 
-const Branch = styled(_Branch)`
+const _Branch = styled.div`
   display: flex;
   flex-flow: ${({ value }) => (isObject(value) ? "column" : "row")} nowrap;
+  margin: 8px 0 8px 0;
+
   svg {
     margin-right: 8px;
   }
@@ -83,7 +128,16 @@ const Branch = styled(_Branch)`
     display: flex;
     flex-flow: column nowrap;
     margin-left: 32px;
+
+    ${({ value }) =>
+      isObject(value) &&
+      `
+        overflow: hidden;
+        transition: height 0.3s ease-out;
+        height: 0px;
+      `}
   }
+
   ${({ original }) =>
     !original &&
     `
@@ -91,13 +145,12 @@ const Branch = styled(_Branch)`
       :before {
         content: '';
         position: absolute;
-        border-left: 1px dashed black;
+        border-left: 1px dashed ${colors.primary};
         position: absolute;
-        height: 94%;
-        top: 3%;
+        height: 170%;
         left: -8px;
       }
-      `};
+    `};
 `;
 
 Branch.defaultProps = {

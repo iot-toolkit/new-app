@@ -1,5 +1,6 @@
 import React from "react";
 import Tree from "./Tree";
+import styled from "styled-components";
 
 export default {
   title: "Design/Organisms/Tree",
@@ -69,7 +70,25 @@ var data = {
 
 const setData = (_data) => (data = _data);
 
-const Template = (args) => <Tree {...args} />;
+const Chuj = styled.div`
+  margin: 32px 25vw 16px 25vw;
+
+  background: white;
+
+  @media screen and (max-width: 992px) {
+    margin: 32px 15vw 16px 15vw;
+  }
+
+  @media screen and (max-width: 600px) {
+    margin: 32px 5vw 16px 5vw;
+  }
+`;
+
+const Template = (args) => (
+  <Chuj>
+    <Tree {...args} />
+  </Chuj>
+);
 
 export const Primary = Template.bind({});
 Primary.args = {
