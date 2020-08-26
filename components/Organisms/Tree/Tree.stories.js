@@ -70,10 +70,8 @@ var data = {
 
 const setData = (_data) => (data = _data);
 
-const Chuj = styled.div`
+const Temp = styled.div`
   margin: 32px 25vw 16px 25vw;
-
-  background: white;
 
   @media screen and (max-width: 992px) {
     margin: 32px 15vw 16px 15vw;
@@ -85,9 +83,9 @@ const Chuj = styled.div`
 `;
 
 const Template = (args) => (
-  <Chuj>
+  <Temp>
     <Tree {...args} />
-  </Chuj>
+  </Temp>
 );
 
 export const Primary = Template.bind({});

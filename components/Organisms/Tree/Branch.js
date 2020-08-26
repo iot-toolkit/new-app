@@ -20,7 +20,6 @@ function Branch({ name, value: _value, query, original }) {
   const { data, setData } = useContext(DataContext);
 
   useEffect(() => {
-    console.log(query, value);
     setData(updateObjectUsingPath(data, query, value));
   }, [value]);
 
@@ -69,9 +68,6 @@ function Branch({ name, value: _value, query, original }) {
     } else {
       expandSection(current);
     }
-
-    console.log(collapsible);
-    console.log(current);
   }
 
   return (
