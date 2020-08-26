@@ -14,6 +14,7 @@ function _Input({
   transparent,
   onChange,
   number,
+  autoR,
 }) {
   const [Size, setSize] = useState(1);
   const resizable = useRef(null);
@@ -31,17 +32,29 @@ function _Input({
   }
 
   return raw ? (
-    <span className={className}>
-      <input
-        ref={resizable}
-        className="raw"
-        value={value}
-        type={type}
-        onChange={handleChange}
-        style={{ width: "calc(" + Size + " * 0.65em)" }}
-      />
-      <div className="border" />
-    </span>
+    autoR ? (
+      <span className={className}>
+        <input
+          ref={resizable}
+          className="raw"
+          value={value}
+          type={type}
+          onChange={handleChange}
+          style={{ width: "calc(" + Size + " * 0.65em)" }}
+        />
+        <div className="border" />
+      </span>
+    ) : (
+      <span className={className}>
+        <input
+          className="raw"
+          value={value}
+          type={type}
+          onChange={handleChange}
+        />
+        <div className="border" />
+      </span>
+    )
   ) : Icon ? (
     <span className={className}>
       <input
@@ -260,6 +273,7 @@ Input.defaultProps = {
   width: "200px",
   height: "40px",
   number: false,
+  autoR: false,
 };
 
 export default Input;

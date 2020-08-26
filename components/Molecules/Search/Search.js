@@ -1,21 +1,42 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { FaSearch } from "react-icons/fa";
+import { RiSearchEyeLine } from "react-icons/ri";
 import Input from "../../Atoms/Inputs";
 
-function _Search({ className }) {
+function Search({ size }) {
+  const [Clicked, setClicked] = useState(false);
+
+  const toggleClick = () => setClicked(!Clicked);
+
   return (
-    <div className={className}>
-      <FaSearch color="white" />
-      <Input transparent={true} />
-    </div>
+    <_Search clicked={Clicked}>
+      <RiSearchEyeLine size={size} onClick={toggleClick} />
+      <Input raw height={size} />
+    </_Search>
   );
 }
 
-const Search = styled(_Search)`
-  display: flex;
+const _Search = styled.div`
+  display: inline-flex;
   align-items: center;
-  background: black;
+
+  > span {
+    transform: scaleX(0);
+    transform-origin: left;
+    margin-left: 0;
+    transition: margin-left 400ms, transform 400ms ease-out;
+  }
+
+  ${({ clicked }) =>
+    clicked &&
+    `
+      > span {
+        transform: scaleX(1);
+        margin-left: 16px;
+      }
+    `}
 `;
+
+Search.defaultProps = { size: "25px" };
 
 export default Search;
