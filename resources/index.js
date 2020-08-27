@@ -11,7 +11,8 @@ const colors = {
   blue: "rgb(0, 128, 255)",
 };
 
-const reverse = { primary: colors.secondary, secondary: colors.primary };
+const reverseColor = { primary: colors.secondary, secondary: colors.primary };
+const reverseSide = { right: "left", left: "right" };
 
 const keyframe = {
   default: keyframes`
@@ -38,4 +39,4 @@ const keyframe = {
 `,
 };
 
-export { colors, reverse, keyframe as keyframes };
+export { colors, reverseColor, keyframe, reverseSide };

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, keyframes } from "resources";
+import { colors, keyframe } from "resources";
 
 const { whitegrey } = colors;
 
@@ -11,7 +11,7 @@ const Button = styled.button`
   text-transform: uppercase;
   color: ${({ variant }) => colors[variant]};
 
-  animation: 0.6s linear 0s 1 ${keyframes.default};
+  animation: 0.6s linear 0s 1 ${keyframe.default};
 
   border: 0.1em solid ${({ variant }) => colors[variant]};
   border-radius: 24px;

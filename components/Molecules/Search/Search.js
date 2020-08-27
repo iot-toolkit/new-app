@@ -1,15 +1,21 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { RiSearchEyeLine } from "react-icons/ri";
-import Input from "../../Atoms/Inputs";
+import Input from "atoms/Inputs";
+import { reverseSide } from "resources";
 
-function Search({ size }) {
+function Search({ side, size }) {
   const [Clicked, setClicked] = useState(false);
 
   const toggleClick = () => setClicked(!Clicked);
 
-  return (
-    <_Search clicked={Clicked}>
+  return side !== "right" ? (
+    <_Search clicked={Clicked} side={side}>
+      <Input raw height={size} />
+      <RiSearchEyeLine size={size} onClick={toggleClick} />
+    </_Search>
+  ) : (
+    <_Search clicked={Clicked} side={side}>
       <RiSearchEyeLine size={size} onClick={toggleClick} />
       <Input raw height={size} />
     </_Search>
@@ -21,10 +27,10 @@ const _Search = styled.div`
   align-items: center;
 
   > span {
+    margin-${({ side }) => reverseSide[side]}: 16px;
     transform: scaleX(0);
-    transform-origin: left;
-    margin-left: 0;
-    transition: margin-left 400ms, transform 400ms ease-out;
+    transform-origin: ${({ side }) => reverseSide[side]};
+    transition: transform 400ms ease-out;
   }
 
   ${({ clicked }) =>
@@ -32,11 +38,10 @@ const _Search = styled.div`
     `
       > span {
         transform: scaleX(1);
-        margin-left: 16px;
       }
     `}
 `;
 
-Search.defaultProps = { size: "25px" };
+Search.defaultProps = { side: "right", size: "25px" };
 
 export default Search;
