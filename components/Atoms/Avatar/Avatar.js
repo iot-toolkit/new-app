@@ -24,16 +24,17 @@ const Avatar = styled(_Avatar)`
 
   cursor: default;
 
-  font-size: calc(${({ size }) => size} * 0.75);
+  font-size: calc(${({ size }) => size} * 0.65);
   font-family: "Asap";
   text-transform: uppercase;
+  color: black;
 
   justify-content: center;
   align-items: center;
   text-align: center;
 
   --borderWidth: 3px;
-  background: white;
+  background: rgba(255, 255, 255, 0.8);
   position: relative;
   border-radius: 50%;
 

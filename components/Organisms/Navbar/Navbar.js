@@ -1,23 +1,25 @@
+import { IconButton } from "atoms/Buttons";
 import { Logo, Logotype } from "atoms/Logo";
 import NavbarRouter from "molecules/NavbarRouter";
-import Notifications from "molecules/Notifications";
 import Profile from "molecules/Profile";
 import Search from "molecules/Search";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { FiBell } from "react-icons/fi";
 
 function _Navbar({ className }) {
+  const [dropdown, setDropdown] = useState(false);
   return (
     <div className={className}>
       <div>
-        <Logo />
-        <Logotype />
+        <Logo color={dropdown && "white"} />
+        <Logotype color={dropdown && "white"} />
       </div>
-      <NavbarRouter />
+      <NavbarRouter color={dropdown && "white"} />
       <div>
-        <Search />
-        <Notifications />
-        <Profile size="50px" />
+        <Search side="left" color={dropdown && "white"} />
+        <IconButton icon={FiBell} />
+        <Profile size="50px" color={dropdown && "white"} />
       </div>
     </div>
   );
@@ -41,6 +43,7 @@ const Navbar = styled(_Navbar)`
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    z-index: 99;
 
     > :nth-child(n) {
       margin-right: 24px;
@@ -74,6 +77,9 @@ const Navbar = styled(_Navbar)`
       right: 0;
       > :nth-child(n) {
         margin: 16px 16px 0 0;
+      }
+      > :nth-child(1) {
+        margin: 16px 24px 0 0;
       }
     }
 
