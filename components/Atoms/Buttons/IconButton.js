@@ -3,9 +3,9 @@ import { FaBell } from "react-icons/fa";
 import styled from "styled-components";
 import { colors, reverseColor } from "resources";
 
-function _IconButton({ className, icon: Icon, size }) {
+function _IconButton({ className, icon: Icon, size, onClick }) {
   return (
-    <div className={className}>
+    <div className={className} onClick={onClick}>
       <Icon size={size} />
     </div>
   );
@@ -30,7 +30,8 @@ IconButton.defaultProps = {
   variant: "primary",
   color: undefined,
   icon: FaBell,
-  size: 20,
+  size: 25,
+  onClick: () => {},
 };
 
 export default IconButton;

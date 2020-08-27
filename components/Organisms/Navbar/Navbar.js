@@ -11,14 +11,18 @@ function _Navbar({ className }) {
   const [dropdown, setDropdown] = useState(false);
   return (
     <div className={className}>
-      <div>
-        <Logo color={dropdown && "white"} />
-        <Logotype color={dropdown && "white"} />
+      <div style={{ color: dropdown && "white" }}>
+        <Logo />
+        <Logotype />
       </div>
       <NavbarRouter color={dropdown && "white"} />
       <div>
         <Search side="left" color={dropdown && "white"} />
-        <IconButton icon={FiBell} />
+        <IconButton
+          icon={FiBell}
+          onClick={() => setDropdown(!dropdown)}
+          color={dropdown && "white"}
+        />
         <Profile size="50px" color={dropdown && "white"} />
       </div>
     </div>

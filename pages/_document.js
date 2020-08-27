@@ -36,19 +36,19 @@ export default class _Document extends Document {
             href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Asap&display=swap"
             rel="stylesheet"
           />
-          <style global jsx>
-            {`
-              body,
-              html {
-                font-family: "Asap", cursive;
-              }
-            `}
-          </style>
         </Head>
         <body>
           <Main />
           <NextScript />
         </body>
+        <style global jsx>
+          {`
+            body,
+            html {
+              font-family: "Asap", cursive;
+            }
+          `}
+        </style>
       </Html>
     );
   }
