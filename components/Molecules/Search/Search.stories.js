@@ -8,5 +8,8 @@ export default {
 
 const Template = (args) => <Search {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Right = Template.bind({});
+Right.args = { side: "right" };
+
+export const Left = Template.bind({});
+Left.args = { side: "left" };

@@ -1,7 +1,7 @@
 import React from "react";
 import { FaBell } from "react-icons/fa";
 import styled from "styled-components";
-import { colors, reverse } from "resources";
+import { colors, reverseColor } from "resources";
 
 function _IconButton({ className, icon }) {
   return <div className={className}>{icon}</div>;
@@ -14,7 +14,7 @@ const IconButton = styled(_IconButton)`
   transition: color 250ms ease-in-out;
 
   &:hover:not(:active) {
-    color: ${({ variant, color }) => color || reverse[variant]};
+    color: ${({ variant, color }) => color || reverseColor[variant]};
   }
 
   &:active {
