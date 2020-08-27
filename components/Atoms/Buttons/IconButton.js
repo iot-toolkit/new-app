@@ -3,8 +3,12 @@ import { FaBell } from "react-icons/fa";
 import styled from "styled-components";
 import { colors, reverseColor } from "resources";
 
-function _IconButton({ className, icon }) {
-  return <div className={className}>{icon}</div>;
+function _IconButton({ className, icon: Icon, size }) {
+  return (
+    <div className={className}>
+      <Icon size={size} />
+    </div>
+  );
 }
 
 const IconButton = styled(_IconButton)`
@@ -25,7 +29,8 @@ const IconButton = styled(_IconButton)`
 IconButton.defaultProps = {
   variant: "primary",
   color: undefined,
-  icon: <FaBell />,
+  icon: FaBell,
+  size: 20,
 };
 
 export default IconButton;
