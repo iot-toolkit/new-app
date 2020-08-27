@@ -1,6 +1,5 @@
 import Logotype from "atoms/Logotype";
 import NavbarRouter from "molecules/NavbarRouter";
-import Notifications from "molecules/Notifications";
 import Profile from "molecules/Profile";
 import Search from "molecules/Search";
 import React from "react";
@@ -13,7 +12,6 @@ function _Navbar({ className }) {
       <NavbarRouter />
       <div>
         <Search />
-        <Notifications />
         <Profile size="50px" />
       </div>
     </div>
