@@ -1,3 +1,4 @@
+import Navbar from "organisms/Navbar";
 import React from "react";
 import styled from "styled-components";
 // import { DataContainer } from "containers";
@@ -17,9 +18,12 @@ const _Layout = styled.div`
 export default function Layout({ Component, pageProps }) {
   //   const data = DataContainer.useContainer();
   return (
-    <_Layout>
-      {/* <Component {...{ ...pageProps, ...{ data } }} /> */}
-      <Component {...pageProps} />
-    </_Layout>
+    <>
+      <Navbar />
+      <_Layout>
+        {/* <Component {...{ ...pageProps, ...{ data } }} /> */}
+        <Component {...pageProps} />
+      </_Layout>
+    </>
   );
 }
