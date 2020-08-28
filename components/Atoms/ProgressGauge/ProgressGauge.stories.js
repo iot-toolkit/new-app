@@ -10,7 +10,6 @@ const Template = (args) => <ProgressGauge {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  color: "#01796f",
   workingMachines: 9,
   maxMachines: 11,
   name: "working machines",

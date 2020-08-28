@@ -103,6 +103,10 @@ const ProgressGauge = styled(_ProgressGauge)`
 
 ProgressGauge.defaultProps = {
   size: "150px",
+  color: "#01796f",
+  name: "something",
+  workingMachines: 0,
+  maxMachines: 0,
 };
 
 export default ProgressGauge;
