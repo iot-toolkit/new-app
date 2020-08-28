@@ -102,7 +102,7 @@ function Branch({ name, value: _value, query, original }) {
             raw
             value={value}
             height="18px"
-            type={!isNaN(value) && "number"}
+            type={!isNaN(value) ? "number" : undefined}
             onChange={handleChange}
           />
         )}
