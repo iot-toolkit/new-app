@@ -3,7 +3,7 @@ import { FaBell } from "react-icons/fa";
 import styled from "styled-components";
 import { colors, reverseColor } from "resources";
 
-function _IconButton({ className, icon: Icon, size, onClick }) {
+function _IconButton({ className, icon: Icon, size, onClick, color, hover }) {
   return (
     <div className={className} onClick={onClick}>
       <Icon size={size} />
@@ -14,11 +14,11 @@ function _IconButton({ className, icon: Icon, size, onClick }) {
 const IconButton = styled(_IconButton)`
   display: flex;
   align-items: center;
-  color: ${({ variant }) => colors[variant]};
+  color: ${({ variant, color }) => color || colors[variant]};
   transition: color 250ms ease-in-out;
 
   &:hover:not(:active) {
-    color: ${({ variant, color }) => color || reverseColor[variant]};
+    color: ${({ variant, hover }) => hover || reverseColor[variant]};
   }
 
   &:active {
@@ -29,6 +29,7 @@ const IconButton = styled(_IconButton)`
 IconButton.defaultProps = {
   variant: "primary",
   color: undefined,
+  hover: undefined,
   icon: FaBell,
   size: 25,
   onClick: () => {},

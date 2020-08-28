@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function _Avatar({ className, name, size }) {
+function _Avatar({ className, name, size, color }) {
   const [initials, setInitials] = useState(getInitials());
 
   function getInitials() {
@@ -27,14 +27,18 @@ const Avatar = styled(_Avatar)`
   font-size: calc(${({ size }) => size} * 0.65);
   font-family: "Asap";
   text-transform: uppercase;
-  color: black;
+  color: ${({ color }) => color || "black"};
+  transition: all 0.2s ease;
 
   justify-content: center;
   align-items: center;
   text-align: center;
 
   --borderWidth: 3px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(
+    ${({ color }) => (color === "white" ? "0,0,0" : "255, 255, 255")},
+    0.8
+  );
   position: relative;
   border-radius: 50%;
 

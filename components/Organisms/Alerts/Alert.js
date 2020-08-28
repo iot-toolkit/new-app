@@ -66,7 +66,7 @@ function _Alert({
           title={title}
           body={body}
           buttons={buttons}
-          onAnimationEnd={!duration ? handleAnimationEnd : () => {}}
+          onAnimationEnd={!duration ? handleAnimationEnd : undefined}
           passRef={modal}
           height={height}
           width={width}

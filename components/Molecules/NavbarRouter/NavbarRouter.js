@@ -19,6 +19,7 @@ const _NavbarRouter = styled.div`
   position: relative;
   width: 100%;
   color: ${({ color }) => color};
+  transition: all 0.5s ease;
 
   &:after {
     transition: left 300ms ease;

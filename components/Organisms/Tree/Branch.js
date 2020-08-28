@@ -14,13 +14,15 @@ import { DataContext } from "./Tree";
 function Branch({ name, value: _value, query, original }) {
   const [dropdown, setDropdown] = useState(false);
   const [value, setValue] = useState(_value);
+  const [ready, setReady] = useState(false);
 
   const collapsible = useRef(null);
 
   const { data, setData } = useContext(DataContext);
 
   useEffect(() => {
-    setData(updateObjectUsingPath(data, query, value));
+    if (ready) setData(updateObjectUsingPath(data, query, value));
+    else setReady(true);
   }, [value]);
 
   const toggleDropdown = () => setDropdown(!dropdown);
@@ -75,13 +77,17 @@ function Branch({ name, value: _value, query, original }) {
       <div>
         {dropdown ? (
           <IconButton
-            color={colors.blue}
-            icon={<AiOutlineMinusSquare size={"1em"} onClick={handleClick} />}
+            hover={colors.blue}
+            icon={AiOutlineMinusSquare}
+            size={"1em"}
+            onClick={handleClick}
           />
         ) : isObject(value) ? (
           <IconButton
-            color={colors.blue}
-            icon={<AiOutlinePlusSquare size={"1em"} onClick={handleClick} />}
+            hover={colors.blue}
+            icon={AiOutlinePlusSquare}
+            size={"1em"}
+            onClick={handleClick}
           />
         ) : (
           <AiOutlineCloseSquare size={"1em"} color={colors.secondary} />

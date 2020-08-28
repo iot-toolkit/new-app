@@ -41,14 +41,6 @@ export default class _Document extends Document {
           <Main />
           <NextScript />
         </body>
-        <style global jsx>
-          {`
-            body,
-            html {
-              font-family: "Asap", cursive;
-            }
-          `}
-        </style>
       </Html>
     );
   }

@@ -68,7 +68,10 @@ var data = {
   ],
 };
 
-const setData = (_data) => (data = _data);
+const setData = (_data) => {
+  console.log(_data);
+  data = _data;
+};
 
 const Temp = styled.div`
   margin: 32px 25vw 16px 25vw;

@@ -1,3 +1,4 @@
+import "resources/index.css";
 import Layout from "organisms/Layout";
 // import { DataContainer } from "containers";
 

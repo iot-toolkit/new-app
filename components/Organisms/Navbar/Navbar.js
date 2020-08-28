@@ -1,30 +1,45 @@
 import { IconButton } from "atoms/Buttons";
 import { Logo, Logotype } from "atoms/Logo";
 import NavbarRouter from "molecules/NavbarRouter";
-import Profile from "molecules/Profile";
 import Search from "molecules/Search";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FiBell } from "react-icons/fi";
+import Courtain from "./Courtain";
+import Avatar from "atoms/Avatar";
 
 function _Navbar({ className }) {
   const [dropdown, setDropdown] = useState(false);
+  const [visible, setVisible] = useState(true);
+
+  const toggleCurtain = (e) => {
+    if (!dropdown) {
+      setDropdown(true);
+      setVisible(true);
+    }
+    if (dropdown) setVisible(false);
+  };
   return (
     <div className={className}>
-      <div style={{ color: dropdown && "white" }}>
+      <div style={{ color: dropdown ? "white" : "black" }}>
         <Logo />
         <Logotype />
       </div>
-      <NavbarRouter color={dropdown && "white"} />
+      <NavbarRouter color={dropdown ? "white" : undefined} />
       <div>
-        <Search side="left" color={dropdown && "white"} />
+        <Search side="left" color={dropdown ? "white" : undefined} />
         <IconButton
           icon={FiBell}
-          onClick={() => setDropdown(!dropdown)}
-          color={dropdown && "white"}
+          onClick={toggleCurtain}
+          color={dropdown ? "white" : undefined}
         />
-        <Profile size="50px" color={dropdown && "white"} />
+        <Avatar size="50px" color={dropdown ? "white" : undefined} />
       </div>
+      {dropdown && (
+        <Courtain {...{ visible, setVisible, setDropdown }}>
+          <h1>ZIOBRO TY KURWO JEBANA</h1>
+        </Courtain>
+      )}
     </div>
   );
 }
@@ -37,10 +52,13 @@ const Navbar = styled(_Navbar)`
 
   > :nth-child(1) {
     margin-left: 32px;
+    z-index: 99;
+    transition: all 0.2s ease;
   }
 
   > :nth-child(2) {
     max-width: 40%;
+    z-index: 99;
   }
 
   > :nth-child(3) {
@@ -80,10 +98,10 @@ const Navbar = styled(_Navbar)`
       top: 0;
       right: 0;
       > :nth-child(n) {
-        margin: 16px 16px 0 0;
-      }
-      > :nth-child(1) {
         margin: 16px 24px 0 0;
+      }
+      > :nth-child(3) {
+        margin: 16px 16px 0 0;
       }
     }
 
