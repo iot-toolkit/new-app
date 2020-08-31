@@ -25,14 +25,13 @@ function Branch({ name, value: _value, query, original }) {
     else setReady(true);
   }, [value]);
 
-  const toggleDropdown = () => setDropdown(!dropdown);
   const handleChange = (e) => {
     const _value = e.target.value;
     if (!isNaN(value)) setValue(Number(_value));
     else setValue(_value);
   };
 
-  function collapseSection(element) {
+  function collapseSection(element, grandParent) {
     var sectionHeight = element.scrollHeight;
 
     var elementTransition = element.style.transition;
@@ -44,14 +43,34 @@ function Branch({ name, value: _value, query, original }) {
 
       requestAnimationFrame(function () {
         element.style.height = 0 + "px";
+
+        grandParent.style.height =
+          Number(
+            grandParent.style.height.substring(
+              0,
+              grandParent.style.height.length - 2
+            )
+          ) -
+          sectionHeight +
+          "px";
       });
     });
 
     element.setAttribute("data-collapsed", "true");
   }
 
-  function expandSection(element) {
+  function expandSection(element, grandParent) {
     var sectionHeight = element.scrollHeight;
+
+    grandParent.style.height =
+      Number(
+        grandParent.style.height.substring(
+          0,
+          grandParent.style.height.length - 2
+        )
+      ) +
+      sectionHeight +
+      "px";
 
     element.style.height = sectionHeight + "px";
 
@@ -65,10 +84,10 @@ function Branch({ name, value: _value, query, original }) {
     var isNotCollapsed = current.getAttribute("data-collapsed") === "false";
 
     if (isNotCollapsed) {
-      collapseSection(current);
+      collapseSection(current, current.parentElement.parentElement);
       current.setAttribute("data-collapsed", "true");
     } else {
-      expandSection(current);
+      expandSection(current, current.parentElement.parentElement);
     }
   }
 
