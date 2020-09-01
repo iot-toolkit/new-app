@@ -1,5 +1,5 @@
 import { IconButton } from "atoms/Buttons";
-import Input from "atoms/Inputs";
+import { RawInput } from "atoms/Inputs";
 import { Logo, Logotype } from "atoms/Logo";
 import NavbarRouter from "molecules/NavbarRouter";
 import React, { useState } from "react";
@@ -64,8 +64,7 @@ function _Navbar({ className }) {
           <div className="center">
             {dropdown === "search" ? (
               <>
-                <Input
-                  raw
+                <RawInput
                   color="white"
                   value={Value}
                   width="25vw"

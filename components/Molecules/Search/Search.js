@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { RiSearchEyeLine } from "react-icons/ri";
-import Input from "atoms/Inputs";
+import { RawInput } from "atoms/Inputs";
 import { reverseSide } from "resources";
 
 function Search({ side, size, color, onClick }) {
@@ -11,13 +11,13 @@ function Search({ side, size, color, onClick }) {
 
   return side !== "right" ? (
     <_Search clicked={Clicked} side={side} onClick={onClick}>
-      <Input raw height={size} />
+      <RawInput height={size} />
       <RiSearchEyeLine size={size} onClick={toggleClick} color={color} />
     </_Search>
   ) : (
     <_Search clicked={Clicked} side={side}>
       <RiSearchEyeLine size={size} onClick={toggleClick} color={color} />
-      <Input raw height={size} />
+      <RawInput height={size} />
     </_Search>
   );
 }

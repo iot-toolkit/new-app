@@ -7,7 +7,7 @@ import {
 import { colors } from "resources";
 import styled from "styled-components";
 import { IconButton } from "atoms/Buttons";
-import Input from "atoms/Inputs";
+import { RawInput } from "atoms/Inputs";
 import { isObject, updateObjectUsingPath } from "utils";
 import { DataContext } from "./Tree";
 
@@ -117,8 +117,7 @@ function Branch({ name, value: _value, query, original }) {
         {isObject(value) ? (
           value
         ) : (
-          <Input
-            raw
+          <RawInput
             value={value}
             height="18px"
             type={!isNaN(value) ? "number" : undefined}
