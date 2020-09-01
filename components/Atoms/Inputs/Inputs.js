@@ -408,7 +408,6 @@ const commonDefaultProps = {
   width: "200px",
   height: "40px",
 };
-
 RawInput.defaultProps = { ...commonDefaultProps, color: "black", autoR: false };
 
 IconInput.defaultProps = { ...commonDefaultProps, icon: null };
