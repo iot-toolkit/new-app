@@ -63,19 +63,13 @@ function _IconInput({
   onChange,
   icon: Icon,
 }) {
-  function handleChange(e) {
-    e.preventDefault();
-
-    onChange(e);
-  }
-
   return (
     <span className={className}>
       <input
         value={value}
         type={type}
         placeholder={placeholder}
-        onChange={handleChange}
+        onChange={onChange}
       />
       <span className="underline" />
       <div />
@@ -94,18 +88,13 @@ function _LabelInput({
   onChange,
   label,
 }) {
-  function handleChange(e) {
-    e.preventDefault();
-    onChange(e);
-  }
-
   return (
     <span className={className}>
       <input
         value={value}
         type={type}
         placeholder={placeholder}
-        onChange={handleChange}
+        onChange={onChange}
       />
       <span className="underline" />
       <div />
@@ -114,20 +103,22 @@ function _LabelInput({
   );
 }
 
-function _Input({ className, value, placeholder, type, width, height }) {
-  function handleChange(e) {
-    e.preventDefault();
-
-    onChange(e);
-  }
-
+function _Input({
+  className,
+  value,
+  placeholder,
+  type,
+  width,
+  height,
+  onChange,
+}) {
   return (
     <span className={className}>
       <input
         value={value}
         type={type}
         placeholder={placeholder}
-        onChange={handleChange}
+        onChange={onChange}
       />
       <span className="underline" />
     </span>
@@ -211,6 +202,40 @@ const underline = css`
   }
 `;
 
+const customized = css`
+  > input {
+    font-family: "Asap";
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: ${colors.whitegrey};
+
+    border: 0.1em solid ${colors.primary};
+    border-radius: 8px;
+
+    padding: 0.8em 1em;
+    width: ${({ width }) => width};
+    height: calc(100% - 1.8em);
+    cursor: text;
+
+    transition: background 600ms ease-in-out, color 600ms ease-in-out;
+
+    background: none;
+    background-image: linear-gradient(
+      45deg,
+      transparent 50%,
+      ${colors.primary} 50%
+    );
+    background-position: 100%;
+    background-size: 400%;
+
+    &:focus {
+      outline: none;
+      color: ${colors.primary};
+      background-position: 25%;
+    }
+  }
+`;
+
 const RawInput = styled(_RawInput)`
   ${commonStyles}
   > input {
@@ -250,38 +275,7 @@ const IconInput = styled(_IconInput)`
   ${commonStyles}
   ${blur}
   ${underline}
-  
-  > input {
-    font-family: "Asap";
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    color: ${colors.whitegrey};
-
-    border: 0.1em solid ${colors.primary};
-    border-radius: 8px;
-
-    padding: 0.8em 1em;
-    width: ${({ width }) => width};
-    height: calc(100% - 1.8em);
-    cursor: text;
-
-    transition: background 600ms ease-in-out, color 600ms ease-in-out;
-
-    background: none;
-    background-image: linear-gradient(
-      45deg,
-      transparent 50%,
-      ${colors.primary} 50%
-    );
-    background-position: 100%;
-    background-size: 400%;
-
-    &:focus {
-      outline: none;
-      color: ${colors.primary};
-      background-position: 25%;
-    }
-  }
+  ${customized}
 
   > svg {
     height: inherit;
@@ -306,38 +300,7 @@ const LabelInput = styled(_LabelInput)`
   ${commonStyles}
   ${blur}
   ${underline}
-
-  > input {
-    font-family: "Asap";
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    color: ${colors.whitegrey};
-
-    border: 0.1em solid ${colors.primary};
-    border-radius: 8px;
-
-    padding: 0.8em 1em;
-    width: ${({ width }) => width};
-    height: calc(100% - 1.8em);
-    cursor: text;
-
-    transition: background 600ms ease-in-out, color 600ms ease-in-out;
-
-    background: none;
-    background-image: linear-gradient(
-      45deg,
-      transparent 50%,
-      ${colors.primary} 50%
-    );
-    background-position: 100%;
-    background-size: 400%;
-
-    &:focus {
-      outline: none;
-      color: ${colors.primary};
-      background-position: 25%;
-    }
-  }
+  ${customized}
 
   .label {
     height: inherit;
@@ -367,38 +330,7 @@ const LabelInput = styled(_LabelInput)`
 const Input = styled(_Input)`
   ${commonStyles}
   ${underline}
-  
-  > input {
-    font-family: "Asap";
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    color: ${colors.whitegrey};
-
-    border: 0.1em solid ${colors.primary};
-    border-radius: 8px;
-
-    padding: 0.8em 1em;
-    width: ${({ width }) => width};
-    height: calc(100% - 1.8em);
-    cursor: text;
-
-    transition: background 600ms ease-in-out, color 600ms ease-in-out;
-
-    background: none;
-    background-image: linear-gradient(
-      45deg,
-      transparent 50%,
-      ${colors.primary} 50%
-    );
-    background-position: 100%;
-    background-size: 400%;
-
-    &:focus {
-      outline: none;
-      color: ${colors.primary};
-      background-position: 25%;
-    }
-  }
+  ${customized}
 `;
 
 const commonDefaultProps = {
