@@ -1,24 +1,44 @@
 import { IconButton } from "atoms/Buttons";
+import Input from "atoms/Inputs";
 import { Logo, Logotype } from "atoms/Logo";
 import NavbarRouter from "molecules/NavbarRouter";
-import Search from "molecules/Search";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FiBell } from "react-icons/fi";
+import { RiSearchEyeLine } from "react-icons/ri";
 import Courtain from "./Courtain";
 import Avatar from "atoms/Avatar";
+import SearchEntry from "atoms/SearchEntry";
 
 function _Navbar({ className }) {
   const [dropdown, setDropdown] = useState(false);
+  const [Value, setValue] = useState("");
   const [visible, setVisible] = useState(true);
+
+  function handleChange(e) {
+    e.preventDefault();
+
+    const value = e.target.value;
+
+    setValue(value);
+  }
 
   const toggleCurtain = (e) => {
     if (!dropdown) {
-      setDropdown(true);
+      setDropdown(e);
       setVisible(true);
     }
     if (dropdown) setVisible(false);
   };
+
+  const values = [
+    { value: "readings" },
+    { value: "machines", id: "1", detail: "temperature" },
+    { value: "machines", id: "2" },
+    { value: "charts", id: "1" },
+    { value: "dashboard" },
+  ];
+
   return (
     <div className={className}>
       <div style={{ color: dropdown ? "white" : "black" }}>
@@ -27,17 +47,47 @@ function _Navbar({ className }) {
       </div>
       <NavbarRouter color={dropdown ? "white" : undefined} />
       <div>
-        <Search side="left" color={dropdown ? "white" : undefined} />
+        <IconButton
+          icon={RiSearchEyeLine}
+          onClick={() => toggleCurtain("search")}
+          color={dropdown ? "white" : undefined}
+        />
         <IconButton
           icon={FiBell}
-          onClick={toggleCurtain}
+          onClick={() => toggleCurtain("notifications")}
           color={dropdown ? "white" : undefined}
         />
         <Avatar size="50px" color={dropdown ? "white" : undefined} />
       </div>
       {dropdown && (
         <Courtain {...{ visible, setVisible, setDropdown }}>
-          <h1>ZIOBRO TY KURWO JEBANA</h1>
+          <div className="center">
+            {dropdown === "search" ? (
+              <>
+                <Input
+                  raw
+                  color="white"
+                  value={Value}
+                  width="25vw"
+                  placeholder="Search"
+                  onChange={handleChange}
+                />
+                {Value.length > 1 &&
+                  values.map((val, idx) => (
+                    <SearchEntry
+                      key={idx}
+                      value={val.value}
+                      id={val.id}
+                      detail={val.detail}
+                      width="25vw"
+                      color="white"
+                    />
+                  ))}
+              </>
+            ) : (
+              <h1 style={{ color: "white" }}>***** ***</h1>
+            )}
+          </div>
         </Courtain>
       )}
     </div>
@@ -49,6 +99,14 @@ const Navbar = styled(_Navbar)`
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(25vh);
+  }
 
   > :nth-child(1) {
     margin-left: 32px;

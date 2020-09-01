@@ -123,6 +123,7 @@ function Branch({ name, value: _value, query, original }) {
             height="18px"
             type={!isNaN(value) ? "number" : undefined}
             onChange={handleChange}
+            autoR
           />
         )}
       </div>

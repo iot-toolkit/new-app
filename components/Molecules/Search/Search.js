@@ -1,16 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { RiSearchEyeLine } from "react-icons/ri";
 import Input from "atoms/Inputs";
 import { reverseSide } from "resources";
 
-function Search({ side, size, color }) {
+function Search({ side, size, color, onClick }) {
   const [Clicked, setClicked] = useState(false);
 
   const toggleClick = () => setClicked(!Clicked);
 
   return side !== "right" ? (
-    <_Search clicked={Clicked} side={side}>
+    <_Search clicked={Clicked} side={side} onClick={onClick}>
       <Input raw height={size} />
       <RiSearchEyeLine size={size} onClick={toggleClick} color={color} />
     </_Search>

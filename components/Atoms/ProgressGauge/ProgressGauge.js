@@ -22,7 +22,6 @@ function _ProgressGauge({
         <circle cx={radius} cy={radius} r={radius} />
         <circle cx={radius} cy={radius} r={radius} />
       </svg>
-
       <div>
         {workingMachines}/{maxMachines}
       </div>

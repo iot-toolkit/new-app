@@ -6,7 +6,8 @@ function _Input({
   value,
   className,
   icon: Icon,
-  placeholder: Placeholder,
+  label,
+  placeholder,
   type,
   width,
   height,
@@ -15,6 +16,7 @@ function _Input({
   onChange,
   number,
   autoR,
+  color,
 }) {
   const [Size, setSize] = useState(1);
   const resizable = useRef(null);
@@ -39,6 +41,7 @@ function _Input({
           className="raw"
           value={value}
           type={type}
+          placeholder={placeholder}
           onChange={handleChange}
           style={{ width: "calc(" + Size + " * 0.65em)" }}
         />
@@ -50,6 +53,7 @@ function _Input({
           className="raw"
           value={value}
           type={type}
+          placeholder={placeholder}
           onChange={handleChange}
         />
         <div className="border" />
@@ -67,7 +71,7 @@ function _Input({
       <div className="blur" />
       <Icon color="white" />
     </span>
-  ) : Placeholder ? (
+  ) : label ? (
     <span className={className}>
       <input
         className="new"
@@ -77,7 +81,7 @@ function _Input({
       />
       <span className="underline" />
       <div className="blur" />
-      <span className="placeholder">{Placeholder}</span>
+      <span className="placeholder">{label}</span>
     </span>
   ) : (
     <span className={className}>
@@ -154,11 +158,13 @@ const Input = styled(_Input)`
   .raw {
     min-width: 2em;
     height: inherit;
+    width: ${({ width }) => width};
     font-family: "Baloo 2";
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     border: none;
     background: transparent;
+    color: ${({ color }) => color};
 
     &:focus {
       outline: none;
