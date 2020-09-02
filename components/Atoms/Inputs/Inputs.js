@@ -72,8 +72,8 @@ function _IconInput({
         onChange={onChange}
       />
       <span className="underline" />
-      <div />
-      <Icon color="white" />
+      <div className="blur" />
+      <Icon />
     </span>
   );
 }
@@ -97,7 +97,7 @@ function _LabelInput({
         onChange={onChange}
       />
       <span className="underline" />
-      <div />
+      <div className="blur" />
       <span className="label">{label}</span>
     </span>
   );
@@ -142,7 +142,7 @@ const commonStyles = css`
 `;
 
 const blur = css`
-  > div {
+  .blur {
     height: calc(100% - 16px);
     width: ${({ width }) => width};
     position: absolute;
@@ -153,7 +153,7 @@ const blur = css`
       rgba(51, 51, 51, 1) ${({ icon }) => (icon ? "85%" : "55%")},
       rgba(51, 51, 51, 1) 100%
     );
-    right: 0;
+    right: 0.1em;
     top: 8px;
     border-radius: 8px;
     pointer-events: none;
@@ -163,10 +163,20 @@ const blur = css`
     transition-delay: 100ms;
   }
 
-  input:focus ~ div {
+  input:focus ~ .blur {
     visibility: hidden;
     width: 0;
     transition: visibility 300ms linear, width 900ms ease-in-out;
+  }
+
+  input:-webkit-autofill ~ .blur {
+    background: linear-gradient(
+      90deg,
+      rgba(232, 240, 254, 0) 0%,
+      rgba(232, 240, 254, 0) 30%,
+      rgba(232, 240, 254, 1) 55%,
+      rgba(232, 240, 254, 1) 100%
+    );
   }
 `;
 
@@ -199,6 +209,10 @@ const underline = css`
   input:focus + .underline {
     background-position: 25%;
     width: calc(100% - 1.6em);
+  }
+
+  input:-webkit-autofill ~ .underline {
+    background-image: linear-gradient(45deg, transparent 50%, #e8f0fe 50%);
   }
 `;
 
@@ -280,6 +294,7 @@ const IconInput = styled(_IconInput)`
   > svg {
     height: inherit;
     position: absolute;
+    color: white;
     right: 8px;
     z-index: 2;
     visibility: visible;
@@ -293,6 +308,28 @@ const IconInput = styled(_IconInput)`
     visibility: hidden;
     opacity: 0;
     transition: visibility 900ms linear, opacity 250ms ease-in-out;
+  }
+
+  input:-webkit-autofill ~ svg {
+    color: ${colors.primary};
+  }
+
+  input:-webkit-autofill ~ .blur {
+    background: linear-gradient(
+      90deg,
+      rgba(232,240,254, 0) 0%,
+      rgba(232,240,254, 0) 60%,
+      rgba(232,240,254, 1) 85%,
+      rgba(232,240,254, 1) 100%
+    );
+  }
+
+  input:-webkit-autofill ~ .underline {
+    background-image: linear-gradient(
+      45deg,
+      transparent 50%,
+      #E8F0FE 50%
+    );
   }
 `;
 
@@ -315,16 +352,21 @@ const LabelInput = styled(_LabelInput)`
     text-transform: lowercase;
     pointer-events: none;
     visibility: visible;
-    opacity: 1;
-    transition: visibility 600ms linear, opacity 600ms ease-in-out;
+    transform: scaleX(1);
+    transform-origin: right;
+    transition: visibility 600ms linear, transform 300ms ease-in-out;
     transition-delay: 300ms;
   }
 
   input:focus ~ .label {
     visibility: hidden;
-    opacity: 0;
-    transition: visibility 900ms linear, opacity 250ms ease-in-out;
+    transform: scaleX(0);
+    transition: visibility 900ms linear, transform 300ms ease-in-out;
   }
+
+  input:-webkit-autofill ~ .label {
+    color: ${colors.primary};
+  }  
 `;
 
 const Input = styled(_Input)`
@@ -334,9 +376,9 @@ const Input = styled(_Input)`
 `;
 
 const commonDefaultProps = {
-  value: "",
+  value: undefined,
   type: "text",
-  placeholder: "",
+  placeholder: undefined,
   width: "200px",
   height: "40px",
 };

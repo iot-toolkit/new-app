@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { colors } from "resources";
 import { LabelInput } from "atoms/Inputs";
-import { useState } from "react";
+import Button from "atoms/Buttons";
 
 function _login({ className }) {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [Code, setCode] = useState("");
+
+  const passwordInput = useRef(null);
 
   return (
     <div className={className}>
-      <div className="form">
+      <div className="login">
         <h1>Login</h1>
         <div className="input">
           <LabelInput
@@ -20,13 +22,17 @@ function _login({ className }) {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="input">
+        <div className="input" ref={passwordInput}>
           <LabelInput
             value={Password}
             type="password"
             label="password"
             onChange={(e) => setPassword(e.target.value)}
           />
+        </div>
+        <div className="buttons">
+          <Button>Login</Button>
+          <Button>Register</Button>
         </div>
       </div>
     </div>
@@ -38,7 +44,7 @@ const login = styled(_login)`
   justify-content: center;
   align-items: center;
 
-  .form {
+  .login {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,9 +53,6 @@ const login = styled(_login)`
     width: 45vw;
     height: 80vh;
     border-radius: 8px;
-    -webkit-box-shadow: 0px 0px 16px 4px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0px 0px 16px 4px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 0px 16px 4px rgba(0, 0, 0, 0.1);
 
     > h1 {
       margin: 32px;
@@ -59,6 +62,13 @@ const login = styled(_login)`
     .input {
       margin: 16px;
     }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 40vw;
+    margin: 16px;
   }
 `;
 
