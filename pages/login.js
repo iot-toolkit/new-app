@@ -2,11 +2,11 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { LabelInput } from "atoms/Inputs";
 import Button from "atoms/Buttons";
+import Link from "next/link";
 
 function _login({ className }) {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [Code, setCode] = useState("");
 
   const passwordInput = useRef(null);
 
@@ -14,25 +14,24 @@ function _login({ className }) {
     <div className={className}>
       <div className="login">
         <h1>Login</h1>
-        <div className="input">
-          <LabelInput
-            value={Email}
-            type="email"
-            label="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="input" ref={passwordInput}>
-          <LabelInput
-            value={Password}
-            type="password"
-            label="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <LabelInput
+          className="input"
+          value={Email}
+          type="email"
+          label="email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <LabelInput
+          className="input"
+          ref={passwordInput}
+          value={Password}
+          type="password"
+          label="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <div className="buttons">
+          <Link href={"/register"}>Register</Link>
           <Button>Login</Button>
-          <Button>Register</Button>
         </div>
       </div>
     </div>
@@ -46,15 +45,16 @@ const login = styled(_login)`
 
   .login {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
 
     width: 45vw;
     height: 80vh;
-    border-radius: 8px;
+    padding-top: 5vh;
+    box-sizing: border-box;
 
-    > h1 {
+    h1 {
       margin: 32px;
       font-size: 3em;
     }
@@ -66,8 +66,10 @@ const login = styled(_login)`
 
   .buttons {
     display: flex;
-    justify-content: space-around;
-    width: 40vw;
+    justify-content: space-between;
+    align-items: center;
+
+    width: inherit;
     margin: 16px;
   }
 `;

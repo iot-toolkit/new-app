@@ -144,7 +144,7 @@ const commonStyles = css`
 const blur = css`
   .blur {
     height: calc(100% - 16px);
-    width: ${({ width }) => width};
+    width: inherit;
     position: absolute;
     background: linear-gradient(
       90deg,
@@ -379,7 +379,7 @@ const commonDefaultProps = {
   value: undefined,
   type: "text",
   placeholder: undefined,
-  width: "200px",
+  width: "auto",
   height: "40px",
 };
 RawInput.defaultProps = { ...commonDefaultProps, color: "black", autoR: false };

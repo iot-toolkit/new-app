@@ -16,6 +16,7 @@ const Button = styled.button`
   border: 0.1em solid ${({ variant }) => colors[variant]};
   border-radius: 24px;
 
+  width: fit-content;
   padding: 1.4em 3.3em;
   cursor: pointer;
 
