@@ -144,23 +144,23 @@ const commonStyles = css`
 const blur = css`
   .blur {
     height: calc(100% - 16px);
-    width: inherit;
+    width: 100%;
     position: absolute;
     background: linear-gradient(
       90deg,
       rgba(51, 51, 51, 0) 0%,
-      rgba(51, 51, 51, 0) ${({ icon }) => (icon ? "60%" : "30%")},
-      rgba(51, 51, 51, 1) ${({ icon }) => (icon ? "85%" : "55%")},
+      rgba(51, 51, 51, 0) ${({ icon }) => (icon ? "60%" : "35%")},
+      rgba(51, 51, 51, 1) ${({ icon }) => (icon ? "85%" : "60%")},
       rgba(51, 51, 51, 1) 100%
     );
-    right: 0.1em;
     top: 8px;
+    right: 0;
     border-radius: 8px;
     pointer-events: none;
     visibility: visible;
     opacity: 1;
     transition: visibility 600ms linear, width 400ms ease-in-out;
-    transition-delay: 100ms;
+    transition-delay: 200ms;
   }
 
   input:focus ~ .blur {
@@ -170,11 +170,12 @@ const blur = css`
   }
 
   input:-webkit-autofill ~ .blur {
+    right: 0.1em;
     background: linear-gradient(
       90deg,
       rgba(232, 240, 254, 0) 0%,
-      rgba(232, 240, 254, 0) 30%,
-      rgba(232, 240, 254, 1) 55%,
+      rgba(232, 240, 254, 0) 35%,
+      rgba(232, 240, 254, 1) 60%,
       rgba(232, 240, 254, 1) 100%
     );
   }
@@ -312,24 +313,6 @@ const IconInput = styled(_IconInput)`
 
   input:-webkit-autofill ~ svg {
     color: ${colors.primary};
-  }
-
-  input:-webkit-autofill ~ .blur {
-    background: linear-gradient(
-      90deg,
-      rgba(232,240,254, 0) 0%,
-      rgba(232,240,254, 0) 60%,
-      rgba(232,240,254, 1) 85%,
-      rgba(232,240,254, 1) 100%
-    );
-  }
-
-  input:-webkit-autofill ~ .underline {
-    background-image: linear-gradient(
-      45deg,
-      transparent 50%,
-      #E8F0FE 50%
-    );
   }
 `;
 
