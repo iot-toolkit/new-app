@@ -1,30 +1,45 @@
 import { colors } from "resources";
 import styled from "styled-components";
 import React, { useState } from "react";
+import Slider from "./Slider";
+import dynamic from "next/dynamic";
 
-function _Courtain({ className, visible, setDropdown, children }) {
+function Courtain({ visible, setDropdown, children, chosen, choices }) {
   const [ready, setReady] = useState(false);
+  const [size, setSize] = useState(() => {
+    var _size =
+      Math.round(
+        Math.sqrt(
+          Math.pow(window.innerHeight * 2, 2) +
+            Math.pow(window.innerHeight * 2, 2)
+        )
+      ) * 2;
+    console.log(window.innerHeight, window.innerHeight, _size);
+    return _size;
+  });
+
   const handleAnimationEnd = () => {
     if (!visible) setDropdown(false);
     setReady(visible);
   };
 
   return (
-    <div
-      className={className}
+    <_Courtain
       style={{
         animation: `${
           visible ? "fadeIn 0.75s linear" : "fadeOut 0.75s linear"
         }`,
       }}
       onAnimationEnd={handleAnimationEnd}
+      size={size}
     >
       <div>{ready && children}</div>
-    </div>
+      <Slider chosen={chosen} choices={choices} />
+    </_Courtain>
   );
 }
 
-const Courtain = styled(_Courtain)`
+const _Courtain = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -75,7 +90,9 @@ const Courtain = styled(_Courtain)`
     ${colors.primary} 50%
   );
   background-position: 100%;
-  background-size: 264%;
+  background-size: ${({ size }) => (size ? `${size}px ${size}px` : "264%")};
 `;
 
-export default Courtain;
+export default dynamic(() => Promise.resolve(Courtain), {
+  ssr: false,
+});

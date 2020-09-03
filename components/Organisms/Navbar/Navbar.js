@@ -9,11 +9,13 @@ import { RiSearchEyeLine } from "react-icons/ri";
 import Courtain from "./Courtain";
 import Avatar from "atoms/Avatar";
 import SearchEntry from "atoms/SearchEntry";
+import { useRouter } from "next/router";
 
 function _Navbar({ className }) {
   const [dropdown, setDropdown] = useState(false);
   const [Value, setValue] = useState("");
   const [visible, setVisible] = useState(true);
+  const router = useRouter();
 
   function handleChange(e) {
     e.preventDefault();
@@ -27,8 +29,8 @@ function _Navbar({ className }) {
     if (!dropdown) {
       setDropdown(e);
       setVisible(true);
-    }
-    if (dropdown) setVisible(false);
+    } else if (e === dropdown) setVisible(false);
+    else setDropdown(e);
   };
 
   const values = [
@@ -39,9 +41,39 @@ function _Navbar({ className }) {
     { value: "dashboard" },
   ];
 
+  const dropdowns = {
+    search: (
+      <>
+        <RawInput
+          color="white"
+          value={Value}
+          width="25vw"
+          placeholder="Search"
+          onChange={handleChange}
+        />
+        {Value.length > 1 &&
+          values.map((val, idx) => (
+            <SearchEntry
+              key={idx}
+              value={val.value}
+              id={val.id}
+              detail={val.detail}
+              width="25vw"
+              color="white"
+            />
+          ))}
+      </>
+    ),
+    notifications: <h1 style={{ color: "white" }}>***** ***</h1>,
+    profile: <h1 style={{ color: "white" }}>ZIOBRO TY KURWO JEBANA</h1>,
+  };
+
   return (
     <div className={className}>
-      <div style={{ color: dropdown ? "white" : "black" }}>
+      <div
+        style={{ color: dropdown ? "white" : "black" }}
+        onClick={() => router.push("/")}
+      >
         <Logo />
         <Logotype />
       </div>
@@ -57,36 +89,25 @@ function _Navbar({ className }) {
           onClick={() => toggleCurtain("notifications")}
           color={dropdown ? "white" : undefined}
         />
-        <Avatar size="50px" color={dropdown ? "white" : undefined} />
+        <Avatar
+          size="50px"
+          color={dropdown ? "white" : undefined}
+          onClick={() => toggleCurtain("profile")}
+        />
       </div>
       {dropdown && (
-        <Courtain {...{ visible, setVisible, setDropdown }}>
-          <div className="center">
-            {dropdown === "search" ? (
-              <>
-                <RawInput
-                  color="white"
-                  value={Value}
-                  width="25vw"
-                  placeholder="Search"
-                  onChange={handleChange}
-                />
-                {Value.length > 1 &&
-                  values.map((val, idx) => (
-                    <SearchEntry
-                      key={idx}
-                      value={val.value}
-                      id={val.id}
-                      detail={val.detail}
-                      width="25vw"
-                      color="white"
-                    />
-                  ))}
-              </>
-            ) : (
-              <h1 style={{ color: "white" }}>***** ***</h1>
-            )}
-          </div>
+        <Courtain
+          {...{
+            visible,
+            setVisible,
+            setDropdown,
+            chosen: Object.keys(dropdowns).indexOf(dropdown),
+            choices: Object.keys(dropdowns).map((val) => {
+              return () => toggleCurtain(val);
+            }),
+          }}
+        >
+          <div className="center">{dropdowns[dropdown]}</div>
         </Courtain>
       )}
     </div>
@@ -111,6 +132,7 @@ const Navbar = styled(_Navbar)`
     margin-left: 32px;
     z-index: 99;
     transition: all 0.2s ease;
+    cursor: pointer;
   }
 
   > :nth-child(2) {
