@@ -1,15 +1,28 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import NavbarEntry from "./NavbarEntry";
 
-function NavbarRouter({ color }) {
-  const [Chosen, setChosen] = useState(0);
+function NavbarRouter({ color, setVisible }) {
+  const router = useRouter();
+  const paths = ["/", "/machines", "/readings", "/support"];
+  const [Chosen, setChosen] = useState(paths.indexOf(router.pathname));
+
+  useEffect(() => {
+    setChosen(paths.indexOf(router.pathname));
+  }, [router.pathname]);
+
+  const handleClick = (value) => {
+    setVisible(false);
+    setChosen(value);
+  };
   return (
     <_NavbarRouter chosen={Chosen} color={color}>
-      <NavbarEntry id={0} onClick={setChosen} page="dashboard" />
-      <NavbarEntry id={1} onClick={setChosen} page="machines" />
-      <NavbarEntry id={2} onClick={setChosen} page="readings" />
-      <NavbarEntry id={3} onClick={setChosen} page="support" />
+      <NavbarEntry id={0} onClick={handleClick} page="dashboard" />
+      <NavbarEntry id={1} onClick={handleClick} page="machines" />
+      <NavbarEntry id={2} onClick={handleClick} page="readings" />
+      <NavbarEntry id={3} onClick={handleClick} page="support" />
     </_NavbarRouter>
   );
 }

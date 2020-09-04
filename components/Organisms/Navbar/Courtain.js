@@ -3,6 +3,9 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import Slider from "./Slider";
 import dynamic from "next/dynamic";
+import Carousel from "./Carousel";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 function Courtain({ visible, setDropdown, children, chosen, choices }) {
   const [ready, setReady] = useState(false);
@@ -14,9 +17,13 @@ function Courtain({ visible, setDropdown, children, chosen, choices }) {
             Math.pow(window.innerHeight * 2, 2)
         )
       ) * 2;
-    console.log(window.innerHeight, window.innerHeight, _size);
     return _size;
   });
+  const router = useRouter();
+
+  useEffect(() => {
+    ready && router.push("#settings-" + chosen);
+  }, [ready, chosen]);
 
   const handleAnimationEnd = () => {
     if (!visible) setDropdown(false);
@@ -33,7 +40,7 @@ function Courtain({ visible, setDropdown, children, chosen, choices }) {
       onAnimationEnd={handleAnimationEnd}
       size={size}
     >
-      <div>{ready && children}</div>
+      {visible && ready && <Carousel children={children} />}
       <Slider chosen={chosen} choices={choices} />
     </_Courtain>
   );
@@ -46,6 +53,10 @@ const _Courtain = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 97;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   @keyframes fadeIn {
     0% {

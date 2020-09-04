@@ -4,12 +4,11 @@ import { VscChromeClose } from "react-icons/vsc";
 import { colors } from "resources";
 
 function _Slider({ chosen, choices, className }) {
-  console.log(choices, chosen);
   return (
     <div className={className}>
       <ul className="pagination">
         {choices.map((val, idx) => (
-          <div
+          <a
             className={
               chosen === idx
                 ? "pagination__link" + " is_active"
@@ -17,9 +16,10 @@ function _Slider({ chosen, choices, className }) {
             }
             onClick={val}
             key={idx}
+            href={"#settings-" + idx}
           >
             {chosen === idx && <VscChromeClose />}
-          </div>
+          </a>
         ))}
       </ul>
     </div>
@@ -73,8 +73,8 @@ const Slider = styled(_Slider)`
 
       > svg {
         color: ${colors.primary};
-        width: 10%;
-        height: 10%;
+        width: 0;
+        height: 0;
         transition: all 250ms ease;
       }
     }
