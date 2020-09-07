@@ -1,19 +1,20 @@
 import styled from "styled-components";
 import { colors, keyframe } from "resources";
 
-const { whitegrey } = colors;
-
 const Button = styled.button`
   font-family: "Asap";
   font-weight: 700;
   font-size: 0.75rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: ${({ variant }) => colors[variant]};
+  color: ${({ reverseColor, variant }) =>
+    reverseColor ? colors.whitegrey : colors[variant]};
 
   animation: 0.6s linear 0s 1 ${keyframe.default};
 
-  border: 0.1em solid ${({ variant }) => colors[variant]};
+  border: 0.1em solid
+    ${({ reverseColor, variant }) =>
+      reverseColor ? colors.whitegrey : colors[variant]};
   border-radius: 24px;
 
   width: fit-content;
@@ -26,13 +27,16 @@ const Button = styled.button`
   background-image: linear-gradient(
     45deg,
     transparent 50%,
-    ${({ variant }) => colors[variant]} 50%
+    ${({ reverseColor, variant }) =>
+        reverseColor ? colors.whitegrey : colors[variant]}
+      50%
   );
   background-position: 25%;
   background-size: 400%;
 
   &:hover:not(:active) {
-    color: ${whitegrey};
+    color: ${({ reverseColor }) =>
+      reverseColor ? colors.primary : colors.whitegrey};
     background-position: 90%;
   }
 
@@ -48,6 +52,7 @@ const Button = styled.button`
 
 Button.defaultProps = {
   variant: "primary",
+  reverseColor: false,
 };
 
 export default Button;

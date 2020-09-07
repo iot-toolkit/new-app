@@ -25,6 +25,7 @@ function _loginRegister({ className }) {
               type="text"
               label="full name"
               width={width}
+              reverseColor
               onChange={(e) => setFullName(e.target.value)}
             />
             <LabelInput
@@ -33,6 +34,7 @@ function _loginRegister({ className }) {
               type="password"
               label="confirm password"
               width={width}
+              reverseColor
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <div className="buttons">
@@ -44,7 +46,7 @@ function _loginRegister({ className }) {
               >
                 Back
               </div>
-              <Button>Register</Button>
+              <Button reverseColor>Register</Button>
             </div>
           </>
         ) : (
@@ -56,6 +58,7 @@ function _loginRegister({ className }) {
               type="email"
               label="email"
               width={width}
+              reverseColor
               onChange={(e) => setEmail(e.target.value)}
             />
             <LabelInput
@@ -64,13 +67,14 @@ function _loginRegister({ className }) {
               type="password"
               label="password"
               width={width}
+              reverseColor
               onChange={(e) => setPassword(e.target.value)}
             />
             <div className="buttons">
               <div className="register" onClick={() => setRegister(true)}>
                 Register
               </div>
-              <Button>Login</Button>
+              <Button reverseColor>Login</Button>
             </div>
           </>
         )}
@@ -97,6 +101,7 @@ const loginRegister = styled(_loginRegister)`
     box-sizing: border-box;
 
     h1 {
+      color: ${colors.whitegrey};
       margin: 32px;
       font-size: 3em;
     }
@@ -121,22 +126,22 @@ const loginRegister = styled(_loginRegister)`
 
     .register {
       cursor: pointer;
-      color: ${colors.primary};
+      color: #e4e4e4;
       transition: color 250ms ease-in-out;
 
       &:hover {
-        color: black;
+        color: white;
         text-decoration: underline;
       }
     }
 
     .back {
       cursor: pointer;
-      color: ${colors.primary};
+      color: #e4e4e4;
       transition: color 250ms ease-in-out;
 
       &:hover {
-        color: black;
+        color: white;
         text-decoration: underline;
       }
     }

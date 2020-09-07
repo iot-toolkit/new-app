@@ -87,6 +87,7 @@ function _LabelInput({
   height,
   onChange,
   label,
+  reverseColor,
 }) {
   return (
     <span className={className}>
@@ -153,6 +154,20 @@ const blur = css`
       rgba(51, 51, 51, 1) ${({ icon }) => (icon ? "85%" : "60%")},
       rgba(51, 51, 51, 1) 100%
     );
+    ${({ reverseColor, icon }) =>
+      reverseColor
+        ? `background: linear-gradient(
+          90deg,
+          rgba(236, 236, 236, 0) 0%,
+          rgba(236, 236, 236, 0) ${icon ? "60%" : "35%"},
+          rgba(236, 236, 236, 1) ${icon ? "85%" : "60%"},
+          rgba(236, 236, 236, 1) 100%)`
+        : `background: linear-gradient(
+          90deg,
+          rgba(51, 51, 51, 0) 0 %,
+          rgba(51, 51, 51, 0) ${icon ? "60%" : "35%"},
+          rgba(51, 51, 51, 1) ${icon ? "85%" : "60%"},
+          rgba(51, 51, 51, 1) 100 %)`};
     top: 8px;
     right: 0;
     border-radius: 8px;
@@ -197,11 +212,14 @@ const underline = css`
 
     transition: background 600ms ease-in-out, width 600ms ease-in-out;
 
-    background: ${colors.primary};
+    background: ${({ reverseColor }) =>
+      reverseColor ? colors.whitegrey : colors.primary};
     background-image: linear-gradient(
       45deg,
       transparent 50%,
-      ${colors.whitegrey} 50%
+      ${({ reverseColor }) =>
+        reverseColor ? colors.primary : colors.whitegrey}
+        50%
     );
     background-position: 100%;
     background-size: 400%;
@@ -213,6 +231,7 @@ const underline = css`
   }
 
   input:-webkit-autofill ~ .underline {
+    background: ${colors.primary}
     background-image: linear-gradient(45deg, transparent 50%, #e8f0fe 50%);
   }
 `;
@@ -222,9 +241,12 @@ const customized = css`
     font-family: "Asap";
     font-size: 0.75rem;
     letter-spacing: 0.1em;
-    color: ${colors.whitegrey};
+    color: ${({ reverseColor }) =>
+      reverseColor ? colors.primary : colors.whitegrey};
 
-    border: 0.1em solid ${colors.primary};
+    border: 0.1em solid
+      ${({ reverseColor }) =>
+        reverseColor ? colors.whitegrey : colors.primary};
     border-radius: 8px;
 
     padding: 0.8em 1em;
@@ -238,14 +260,17 @@ const customized = css`
     background-image: linear-gradient(
       45deg,
       transparent 50%,
-      ${colors.primary} 50%
+      ${({ reverseColor }) =>
+          reverseColor ? colors.whitegrey : colors.primary}
+        50%
     );
     background-position: 100%;
     background-size: 400%;
 
     &:focus {
       outline: none;
-      color: ${colors.primary};
+      color: ${({ reverseColor }) =>
+        reverseColor ? colors.whitegrey : colors.primary};
       background-position: 25%;
     }
   }
@@ -330,7 +355,8 @@ const LabelInput = styled(_LabelInput)`
     z-index: 2;
     display: flex;
     align-items: center;
-    color: white;
+    color: ${({ reverseColor }) =>
+      reverseColor ? colors.primary : colors.whitegrey};
     font-family: "Baloo 2";
     text-transform: lowercase;
     pointer-events: none;
@@ -369,7 +395,11 @@ RawInput.defaultProps = { ...commonDefaultProps, color: "black", autoR: false };
 
 IconInput.defaultProps = { ...commonDefaultProps, icon: null };
 
-LabelInput.defaultProps = { ...commonDefaultProps, label: "Label" };
+LabelInput.defaultProps = {
+  ...commonDefaultProps,
+  label: "Label",
+  reverseColor: false,
+};
 
 Input.defaultProps = { ...commonDefaultProps };
 
