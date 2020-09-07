@@ -103,12 +103,24 @@ const loginRegister = styled(_loginRegister)`
     h1 {
       color: ${colors.whitegrey};
       margin: 32px;
-      font-size: 3em;
     }
 
-    .raw-inputs {
-      display: grid;
-      grid-template-columns: repeat(2, 50%);
+    @media screen and (min-width: 300px) {
+      h1 {
+        font-size: 2em;
+      }
+    }
+
+    @media screen and (min-width: 350px) {
+      h1 {
+        font-size: 2.5em;
+      }
+    }
+
+    @media screen and (min-width: 400px) {
+      h1 {
+        font-size: 3em;
+      }
     }
 
     .input {

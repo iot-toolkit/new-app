@@ -250,9 +250,20 @@ const customized = css`
     border-radius: 8px;
 
     padding: 0.8em 1em;
-    width: ${({ width }) => width};
     height: calc(100% - 1.8em);
     cursor: text;
+
+    @media screen and (min-width: 300px) {
+      width: ${({ width }) => "calc( " + width + " * 2)"};
+    }
+
+    @media screen and (min-width: 350px) {
+      width: ${({ width }) => "calc( " + width + " * 1.5)"};
+    }
+
+    @media screen and (min-width: 400px) {
+      width: ${({ width }) => width};
+    }
 
     transition: background 600ms ease-in-out, color 600ms ease-in-out;
 
