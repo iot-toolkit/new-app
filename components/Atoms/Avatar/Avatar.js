@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function _Avatar({ className, name, size, color }) {
+function _Avatar({ className, name, size, color, onClick }) {
   const [initials, setInitials] = useState(getInitials());
 
   function getInitials() {
@@ -12,7 +12,11 @@ function _Avatar({ className, name, size, color }) {
     return initials;
   }
 
-  return <div className={className}>{initials}</div>;
+  return (
+    <div onClick={onClick} className={className}>
+      {initials}
+    </div>
+  );
 }
 
 const Avatar = styled(_Avatar)`
